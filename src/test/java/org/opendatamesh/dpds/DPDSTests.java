@@ -1,10 +1,7 @@
 package org.opendatamesh.dpds;
 
 import org.opendatamesh.dpds.model.DataProductVersionDPDS;
-import org.opendatamesh.dpds.parser.DPDSParser;
-import org.opendatamesh.dpds.parser.DPDSSerializer;
-import org.opendatamesh.dpds.parser.ParseOptions;
-import org.opendatamesh.dpds.parser.ParseResult;
+import org.opendatamesh.dpds.parser.*;
 import org.opendatamesh.dpds.location.DescriptorLocation;
 import org.opendatamesh.dpds.utils.DPDSTestResources;
 
@@ -23,6 +20,7 @@ public class DPDSTests {
     static {
         DEFAULT_PARSE_OPTION = new ParseOptions();
         DEFAULT_PARSE_OPTION.setServerUrl("http://localhost:80");
+        DEFAULT_PARSE_OPTION.setIdentifierStrategy(IdentifierStrategyFactory.getDefault("org.opendatamesh"));
     }
 
     protected ParseResult parseDescriptorFromContent(DPDSTestResources resource, ParseOptions options) {

@@ -28,7 +28,7 @@ License.
     <artifactId>odm-specification-dpdescriptor-parser</artifactId>
     <name>ODM Specification Data Product Descriptor Parser</name>
     <description>Specification Parser for Data Product Descriptor of Open Data Mesh</description>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <distributionManagement>
         <repository>
