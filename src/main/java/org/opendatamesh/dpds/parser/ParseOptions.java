@@ -4,7 +4,7 @@ public class ParseOptions {
     // the base url of ODM Registry API. 
     // Used to rewrite reference to API, Schemas and templates
     private String serverUrl;
-    private IdentifierStrategy identifierStrategy = IdentifierStrategyFactory.getDefault("");
+    private IdentifierStrategy identifierStrategy = IdentifierStrategyFactory.getDefault();
 
     private boolean validate = true;
     private boolean validateReadOnlyProperties = false;

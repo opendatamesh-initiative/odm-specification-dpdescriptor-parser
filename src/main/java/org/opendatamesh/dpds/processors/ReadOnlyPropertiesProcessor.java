@@ -96,7 +96,7 @@ class ReadOnlyPropertiesProcessor implements PropertiesProcessor {
 
         // Rewrite "fqn"
         try {
-            fqn = context.getOptions().getIdentifierStrategy().getFqn(descriptor, null);
+            fqn = context.getOptions().getIdentifierStrategy().getFqn(descriptor);
         } catch (Throwable t) {
             throw new DeserializationException("Impossible to calculate data product fqn", t);
         }

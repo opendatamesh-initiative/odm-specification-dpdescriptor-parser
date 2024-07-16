@@ -20,7 +20,7 @@ public class DPDSTests {
     static {
         DEFAULT_PARSE_OPTION = new ParseOptions();
         DEFAULT_PARSE_OPTION.setServerUrl("http://localhost:80");
-        DEFAULT_PARSE_OPTION.setIdentifierStrategy(IdentifierStrategyFactory.getDefault("org.opendatamesh"));
+        DEFAULT_PARSE_OPTION.setIdentifierStrategy(IdentifierStrategyFactory.getDefault());
     }
 
     protected ParseResult parseDescriptorFromContent(DPDSTestResources resource, ParseOptions options) {
