@@ -42,14 +42,14 @@ public class DPDSParser {
         ParseContext context = new ParseContext(location, options);
         parseRootDoc(context);
 
-        if (options.isResoveExternalRef())
+        if (options.isResolveExternalRef())
             processExternalReferences(context);
 
-        if (options.isResoveApiDefinitions()) {
+        if (options.isResolveApiDefinitions()) {
             processApiDefinitions(context);
         }
 
-        if (options.isResoveReadOnlyProperties())
+        if (options.isResolveReadOnlyProperties())
             processReadOnlyProperties(context);
 
         if (context.getOptions().isValidate()) {
@@ -78,7 +78,7 @@ public class DPDSParser {
 
     public Set<ValidationMessage> validateSchema(
             DataProductVersionDPDS descriptor
-    ) throws DeserializationException, ValidationException {
+    ) throws DeserializationException {
         try {
             DPDSSerializer serializer = new DPDSSerializer("json", false);
             String serializedContent = serializer.serialize(descriptor, "canonical");

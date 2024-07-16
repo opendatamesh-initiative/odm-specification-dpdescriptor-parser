@@ -49,7 +49,7 @@ class ReadOnlyPropertiesProcessor implements PropertiesProcessor {
             addReadOnlyPropertiesToComponents(descriptor,
                     descriptor.getInternalComponents().getInfrastructuralComponents(),
                     EntityTypeDPDS.INFRASTRUCTURE);
-            
+
             addReadOnlyPropertiesToLifecycle();
         }
     }
@@ -57,10 +57,10 @@ class ReadOnlyPropertiesProcessor implements PropertiesProcessor {
     private void addReadOnlyPropertiesToLifecycle() throws DeserializationException {
         DataProductVersionDPDS descriptor = context.getResult().getDescriptorDocument();
         InternalComponentsDPDS internalComponents = descriptor.getInternalComponents();
-        if(!internalComponents.hasLifecycleInfo()) return;
+        if (!internalComponents.hasLifecycleInfo()) return;
         List<LifecycleTaskInfoDPDS> tasksInfo = internalComponents.getLifecycleInfo().getTasksInfo();
-        for(LifecycleTaskInfoDPDS taskInfo: tasksInfo) {
-            if(!taskInfo.hasTemplate()) continue; 
+        for (LifecycleTaskInfoDPDS taskInfo : tasksInfo) {
+            if (!taskInfo.hasTemplate()) continue;
             this.addReadOnlyPropertiesToComponent(descriptor, taskInfo.getTemplate(), EntityTypeDPDS.TEMPLATE);
         }
     }
