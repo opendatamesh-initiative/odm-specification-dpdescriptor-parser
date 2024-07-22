@@ -17,6 +17,15 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: maven
+      - name: Get Git Tag
+        run: echo "TAG_VERSION=$( echo ${{github.ref_name}} | sed 's/[^0-9.]//g' )" >> $GITHUB_ENV
+      - name: Get Maven Version
+        run:  echo "MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+      - name: Check Tag and Version Match
+        if: ${{ env.TAG_VERSION }} != ${{ env.MAVEN_VERSION }}
+        run: |
+         echo "Git tag (${{ env.TAG_VERSION }}) does not match POM version (${{ env.MAVEN_VERSION }})"
+         exit 1
       - name: Publish package
         run: mvn --batch-mode deploy
         env:
