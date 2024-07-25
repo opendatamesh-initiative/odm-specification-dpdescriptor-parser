@@ -65,7 +65,9 @@ class OpenApiParser implements ApiParser {
                     if (response == null)
                         continue;
                     ObjectNode schema = (ObjectNode) response.get("schema");
-
+                    if (schema == null) {
+                        continue;
+                    }
                     ApiDefinitionEndpointDPDS endpoint;
                     String name = null, schemaMediaType = null, outputMediaType = null, operationSchema = null;
 

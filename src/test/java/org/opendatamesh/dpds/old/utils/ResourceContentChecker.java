@@ -1,4 +1,4 @@
-package org.opendatamesh.dpds.utils;
+package org.opendatamesh.dpds.old.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;

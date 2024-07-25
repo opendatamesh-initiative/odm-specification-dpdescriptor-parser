@@ -1,11 +1,12 @@
-package org.opendatamesh.dpds.utils;
+package org.opendatamesh.dpds.old.utils;
 
 import lombok.Data;
-import org.opendatamesh.dpds.GitServiceMock;
+import org.opendatamesh.dpds.mock.GitServiceMock;
 import org.opendatamesh.dpds.location.DescriptorLocation;
 import org.opendatamesh.dpds.location.GitLocation;
 import org.opendatamesh.dpds.location.UriLocation;
 import org.opendatamesh.dpds.location.UriUtils;
+import org.opendatamesh.dpds.utils.ObjectMapperFactory;
 
 import java.io.IOException;
 import java.net.URI;

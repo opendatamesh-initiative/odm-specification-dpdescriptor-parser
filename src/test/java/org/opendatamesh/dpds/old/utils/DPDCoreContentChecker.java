@@ -1,4 +1,4 @@
-package org.opendatamesh.dpds.utils;
+package org.opendatamesh.dpds.old.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.opendatamesh.dpds.model.core.EntityTypeDPDS;
+import org.opendatamesh.dpds.utils.ObjectMapperFactory;
 
 import java.util.regex.Pattern;
 
