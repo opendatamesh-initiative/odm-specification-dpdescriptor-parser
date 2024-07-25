@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -48,7 +49,7 @@ class OpenApiParser implements ApiParser {
         try {
             ObjectNode apiNode = (ObjectNode) mapper.readTree(rawContent);
             if (!apiNode.has("openapi"))
-                return null;
+                return Collections.emptyList();
             if (apiNode.get("paths") != null) {
                 ObjectNode paths = (ObjectNode) apiNode.get("paths");
                 Iterator<String> pathNames = paths.fieldNames();
@@ -65,9 +66,11 @@ class OpenApiParser implements ApiParser {
                     if (response == null)
                         continue;
                     ObjectNode schema = (ObjectNode) response.get("schema");
-
+                    if (schema == null) {
+                        continue;
+                    }
                     ApiDefinitionEndpointDPDS endpoint;
-                    String name = null, schemaMediaType = null, outputMediaType = null, operationSchema = null;
+                    String name = null, schemaMediaType = null, operationSchema = null;
 
                     if (getOperation.get("operationId") != null) {
                         name = getOperation.get("operationId").asText();
@@ -78,6 +81,9 @@ class OpenApiParser implements ApiParser {
                     if (schema.get("$ref") != null) {
 
                         String schemaRef = schema.get("$ref").asText();
+                        if (schemaRef == null) {
+                            continue;
+                        }
                         operationSchema = fetcher.fetchRelativeResource(baseUri, new URI(schemaRef));
                         if (schemaRef.endsWith(".yaml") || schemaRef.endsWith(".yaml")) {
                             schemaMediaType = "application/yaml";
@@ -89,12 +95,6 @@ class OpenApiParser implements ApiParser {
                     } else {
                         operationSchema = schema.toPrettyString();
                         schemaMediaType = mediaType;
-                    }
-
-                    if (getOperation.get("produces") != null) {
-                        outputMediaType = getOperation.get("produces").asText();
-                    } else {
-                        outputMediaType = "application/json";
                     }
 
                     endpoint = new ApiDefinitionEndpointDPDS();

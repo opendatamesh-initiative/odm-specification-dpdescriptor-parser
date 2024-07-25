@@ -1,7 +1,6 @@
 package org.opendatamesh.dpds.model;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -49,7 +48,7 @@ public class DataProductVersionDPDS implements Cloneable {
     @Schema(description = "Document of the External Resource of the Data Product Version", required = true)
     private ExternalResourceDPDS externalDocs;
 
-    @JsonIgnore
+    @JsonProperty("rawContent")
     @Schema(description = "Raw content of the Data Product Version")
     private String rawContent;
 

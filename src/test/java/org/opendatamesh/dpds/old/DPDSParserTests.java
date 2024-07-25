@@ -1,4 +1,4 @@
-package org.opendatamesh.dpds;
+package org.opendatamesh.dpds.old;
 
 import org.junit.jupiter.api.Test;
 import org.opendatamesh.dpds.exceptions.ParseException;
@@ -11,7 +11,7 @@ import org.opendatamesh.dpds.model.internals.InfrastructuralComponentDPDS;
 import org.opendatamesh.dpds.model.internals.InternalComponentsDPDS;
 import org.opendatamesh.dpds.parser.ParseOptions;
 import org.opendatamesh.dpds.parser.ParseResult;
-import org.opendatamesh.dpds.utils.DPDSTestResources;
+import org.opendatamesh.dpds.old.utils.DPDSTestResources;
 
 import java.io.IOException;
 import java.util.List;

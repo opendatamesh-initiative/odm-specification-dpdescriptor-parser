@@ -1,4 +1,4 @@
-package org.opendatamesh.dpds;
+package org.opendatamesh.dpds.old;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -8,7 +8,7 @@ import org.opendatamesh.dpds.parser.DPDSSerializer;
 import org.opendatamesh.dpds.parser.ParseOptions;
 import org.opendatamesh.dpds.parser.ParseResult;
 import org.opendatamesh.dpds.location.UriLocation;
-import org.opendatamesh.dpds.utils.DPDSTestResources;
+import org.opendatamesh.dpds.old.utils.DPDSTestResources;
 import org.opendatamesh.dpds.utils.ObjectMapperFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;

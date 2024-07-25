@@ -17,12 +17,13 @@ import org.slf4j.LoggerFactory;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class DataStoreApiParser implements ApiParser {
     private static final Logger logger = LoggerFactory.getLogger(DataStoreApiParser.class);
     protected URI baseUri;
-    protected UriFetcher fetcher;
+    protected UriFetcher fetcher = new UriFetcher();
 
     public DataStoreApiParser(URI baseUri) {
         this.baseUri = baseUri;
@@ -37,7 +38,7 @@ class DataStoreApiParser implements ApiParser {
     }
 
     private List<ApiDefinitionEndpointDPDS> extractEndpoints(String rawContent, String mediaType) throws DeserializationException, FetchException {
-        List<ApiDefinitionEndpointDPDS> endpoints = new ArrayList<ApiDefinitionEndpointDPDS>();
+        List<ApiDefinitionEndpointDPDS> endpoints = new ArrayList<>();
 
         if (!"application/json".equalsIgnoreCase(mediaType)) {
             throw new DeserializationException("Impossible to parse api definition encoded in [" + mediaType + "]");
@@ -46,68 +47,97 @@ class DataStoreApiParser implements ApiParser {
         ObjectMapper mapper = ObjectMapperFactory.JSON_MAPPER;
         try {
             ObjectNode apiNode = (ObjectNode) mapper.readTree(rawContent);
-            if (!apiNode.has("datastoreapi")) return null;
+            if (apiNode == null || !apiNode.has("datastoreapi")) return Collections.emptyList();
+
             if (!apiNode.at("/schema/tables").isMissingNode()) {
                 ArrayNode tables = (ArrayNode) apiNode.at("/schema/tables");
-                for (int i = 0; i < tables.size(); i++) {
-                    ApiDefinitionEndpointDPDS endpoint;
-                    String name = null, schemaMediaType = null, tableSchema = null;
-                    ObjectNode table = (ObjectNode) tables.get(i);
-                    if (table.get("name") != null) {
-                        name = table.get("name").asText();
-                    } else {
-                        name = "endpoint-" + (i + 1);
-                    }
-                    if (!table.at("/definition/$ref").isMissingNode()) {
-                        tableSchema = fetcher.fetchRelativeResource(baseUri, new URI(table.at("/definition/$ref").asText()));
-                    } else {
-                        tableSchema = mapper.writeValueAsString(table.at("/definition"));
-                    }
+                if (tables != null) {
+                    for (int i = 0; i < tables.size(); i++) {
+                        ApiDefinitionEndpointDPDS endpoint = new ApiDefinitionEndpointDPDS();
+                        String name = null;
+                        String schemaMediaType = null;
+                        String tableSchema = null;
+                        ObjectNode table = (ObjectNode) tables.get(i);
 
-                    if (!table.at("/definition/mediaType").isMissingNode()) {
-                        schemaMediaType = table.at("/definition/mediaType").asText();
-                    } else {
-                        schemaMediaType = "application/json";
+                        if (table != null) {
+                            JsonNode nameNode = table.get("name");
+                            if (nameNode != null) {
+                                name = nameNode.asText();
+                            } else {
+                                name = "endpoint-" + (i + 1);
+                            }
+
+                            JsonNode refNode = table.at("/definition/$ref");
+                            if (!refNode.isMissingNode()) {
+                                tableSchema = fetcher.fetchRelativeResource(baseUri, new URI(refNode.asText()));
+                            } else {
+                                JsonNode definitionNode = table.at("/definition");
+                                if (definitionNode != null) {
+                                    tableSchema = mapper.writeValueAsString(definitionNode);
+                                }
+                            }
+
+                            JsonNode mediaTypeNode = table.at("/definition/mediaType");
+                            if (!mediaTypeNode.isMissingNode()) {
+                                schemaMediaType = mediaTypeNode.asText();
+                            } else {
+                                schemaMediaType = "application/json";
+                            }
+
+                            if (name != null && tableSchema != null && schemaMediaType != null) {
+                                ApiDefinitionEndpointDPDS.Schema schema = new ApiDefinitionEndpointDPDS.Schema();
+                                schema.setMediaType(schemaMediaType);
+                                schema.setContent(tableSchema);
+
+                                endpoint.setName(name);
+                                endpoint.setSchema(schema);
+                                endpoints.add(endpoint);
+                            }
+                        }
                     }
-                    endpoint = new ApiDefinitionEndpointDPDS();
-                    endpoint.setName(name);
-                    ApiDefinitionEndpointDPDS.Schema schema = new ApiDefinitionEndpointDPDS.Schema();
-                    schema.setMediaType(schemaMediaType);
-                    schema.setContent(tableSchema);
-                    endpoint.setSchema(schema);
-                    endpoints.add(endpoint);
                 }
             } else if (!apiNode.at("/schema").isMissingNode()) {
                 JsonNode rawSchema = apiNode.at("/schema");
-                ApiDefinitionEndpointDPDS endpoint;
-                String name = null, schemaMediaType = null, realSchema = null;
-                if (rawSchema.get("name") != null) {
-                    name = rawSchema.get("name").asText();
-                } else {
-                    name = "endpoint-1";
-                }
-                realSchema = mapper.writeValueAsString(rawSchema);
+                if (rawSchema != null) {
+                    ApiDefinitionEndpointDPDS endpoint = new ApiDefinitionEndpointDPDS();
+                    String name = null;
+                    String schemaMediaType = null;
+                    String realSchema = null;
 
-                if (!rawSchema.at("/mediaType").isMissingNode()) {
-                    schemaMediaType = rawSchema.at("/mediaType").asText();
-                } else {
-                    schemaMediaType = "application/json";
+                    JsonNode nameNode = rawSchema.get("name");
+                    if (nameNode != null) {
+                        name = nameNode.asText();
+                    } else {
+                        name = "endpoint-1";
+                    }
+
+                    realSchema = mapper.writeValueAsString(rawSchema);
+
+                    JsonNode mediaTypeNode = rawSchema.at("/mediaType");
+                    if (!mediaTypeNode.isMissingNode()) {
+                        schemaMediaType = mediaTypeNode.asText();
+                    } else {
+                        schemaMediaType = "application/json";
+                    }
+
+                    if (name != null && realSchema != null && schemaMediaType != null) {
+                        ApiDefinitionEndpointDPDS.Schema schema = new ApiDefinitionEndpointDPDS.Schema();
+                        schema.setMediaType(schemaMediaType);
+                        schema.setContent(realSchema);
+
+                        endpoint.setName(name);
+                        endpoint.setSchema(schema);
+                        endpoints.add(endpoint);
+                    }
                 }
-                endpoint = new ApiDefinitionEndpointDPDS();
-                endpoint.setName(name);
-                ApiDefinitionEndpointDPDS.Schema schema = new ApiDefinitionEndpointDPDS.Schema();
-                schema.setMediaType(schemaMediaType);
-                schema.setContent(realSchema);
-                endpoint.setSchema(schema);
-                endpoints.add(endpoint);
             }
-        } catch (JsonProcessingException e) {
-            throw new DeserializationException("Impossible to parse api definition", e);
-        } catch (URISyntaxException e) {
+        } catch (JsonProcessingException | URISyntaxException e) {
             throw new DeserializationException("Impossible to parse api definition", e);
         }
+
         return endpoints;
     }
+
 
     private String resolveMediaType(String mediaType) {
 

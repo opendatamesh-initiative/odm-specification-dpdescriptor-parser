@@ -1,9 +1,9 @@
-package org.opendatamesh.dpds;
+package org.opendatamesh.dpds.old;
 
 import org.opendatamesh.dpds.model.DataProductVersionDPDS;
 import org.opendatamesh.dpds.parser.*;
 import org.opendatamesh.dpds.location.DescriptorLocation;
-import org.opendatamesh.dpds.utils.DPDSTestResources;
+import org.opendatamesh.dpds.old.utils.DPDSTestResources;
 
 import static org.assertj.core.api.Assertions.fail;
 

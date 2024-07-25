@@ -20,8 +20,7 @@ public abstract class ComponentDPDS extends ReferenceableEntityDPDS {
     @Schema(description = "Component group", required = true)
     protected String componentGroup;
 
-    @JsonIgnore
-    @EqualsAndHashCode.Exclude
+
     @Schema(description = "Raw content of the Component", required = true)
     protected String rawContent;
 

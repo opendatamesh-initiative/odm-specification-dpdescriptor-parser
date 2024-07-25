@@ -1,4 +1,4 @@
-package org.opendatamesh.dpds;
+package org.opendatamesh.dpds.old;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,12 +21,12 @@ public class DPDSModelTests extends DPDSTests {
         PortDPDS port1 = new PortDPDS();
         port1.setName("Port Name");
         port1.setVersion("1.0.0");
-        port1.setRawContent("port 1 raw content");
+        port1.setRawContent("port raw content");
 
         PortDPDS port2 = new PortDPDS();
         port2.setName("Port Name");
         port2.setVersion("1.0.0");
-        port2.setRawContent("port 2 raw content");
+        port2.setRawContent("port raw content");
 
         assertThat(port1).isEqualTo(port2);
     }
@@ -35,11 +35,11 @@ public class DPDSModelTests extends DPDSTests {
     public void referencesEqualToTest()  {
         ReferenceObjectDPDS defRef1 = new DefinitionReferenceDPDS();
         defRef1.setRef("RefA");
-        defRef1.setRawContent("def 1 raw content");
+        defRef1.setRawContent("def raw content");
         
         ReferenceObjectDPDS defRef2 = new DefinitionReferenceDPDS();
         defRef2.setRef("RefA");
-        defRef2.setRawContent("def 2 raw content");
+        defRef2.setRawContent("def raw content");
 
         assertThat(defRef1).isEqualTo(defRef2);
     }
@@ -48,11 +48,11 @@ public class DPDSModelTests extends DPDSTests {
     public void definitionsReferencesEqualToTest()  {
         DefinitionReferenceDPDS defRef1 = new DefinitionReferenceDPDS();
         defRef1.setRef("RefA");
-        defRef1.setRawContent("def 1 raw content");
+        defRef1.setRawContent("def raw content");
         
         DefinitionReferenceDPDS defRef2 = new DefinitionReferenceDPDS();
         defRef2.setRef("RefA");
-        defRef2.setRawContent("def 2 raw content");
+        defRef2.setRawContent("def raw content");
 
         assertThat(defRef1).isEqualTo(defRef2);
     }
@@ -62,11 +62,11 @@ public class DPDSModelTests extends DPDSTests {
 
         DefinitionReferenceDPDS defRef1 = new DefinitionReferenceDPDS();
         defRef1.setRef("RefA");
-        defRef1.setRawContent("def 1 raw content");
+        defRef1.setRawContent("def raw content");
         
         DefinitionReferenceDPDS defRef2 = new DefinitionReferenceDPDS();
         defRef2.setRef("RefA");
-        defRef2.setRawContent("def 2 raw content");
+        defRef2.setRawContent("def raw content");
 
         assertThat(defRef1).isEqualTo(defRef2);
 

@@ -1,4 +1,4 @@
-package org.opendatamesh.dpds;
+package org.opendatamesh.dpds.old;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -11,7 +11,7 @@ import org.opendatamesh.dpds.model.internals.InfrastructuralComponentDPDS;
 import org.opendatamesh.dpds.model.internals.LifecycleInfoDPDS;
 import org.opendatamesh.dpds.model.internals.LifecycleTaskInfoDPDS;
 import org.opendatamesh.dpds.parser.ParseResult;
-import org.opendatamesh.dpds.utils.DPDSTestResources;
+import org.opendatamesh.dpds.old.utils.DPDSTestResources;
 import org.opendatamesh.dpds.utils.ObjectMapperFactory;
 
 import java.util.List;

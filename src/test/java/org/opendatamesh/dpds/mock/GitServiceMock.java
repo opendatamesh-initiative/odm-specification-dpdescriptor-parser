@@ -1,4 +1,4 @@
-package org.opendatamesh.dpds;
+package org.opendatamesh.dpds.mock;
 
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
@@ -6,7 +6,7 @@ import org.eclipse.jgit.api.TransportConfigCallback;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.*;
 import org.opendatamesh.dpds.location.GitService;
-import org.opendatamesh.dpds.utils.CustomFileUtils;
+import org.opendatamesh.dpds.old.utils.CustomFileUtils;
 
 import java.io.File;
 import java.net.URISyntaxException;

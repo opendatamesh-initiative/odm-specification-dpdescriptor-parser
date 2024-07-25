@@ -18,7 +18,6 @@ public class LifecycleTaskInfoDPDS {
     @Schema(description = "Lifecycle Task Info name", required = true)
     private String name;
 
-    @JsonIgnore
     @Schema(description = "Name of the goal stage of the task", required = true)
     private String stageName;
 
@@ -38,7 +37,6 @@ public class LifecycleTaskInfoDPDS {
     @Schema(description = "Key-value list of configrations of the Task", required = true)
     private Map<String, Object> configurations; 
 
-    @JsonIgnore
     @Schema(description = "Raw Content of the task")
     String rawContent;
 

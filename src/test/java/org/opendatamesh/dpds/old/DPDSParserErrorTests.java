@@ -1,4 +1,4 @@
-package org.opendatamesh.dpds;
+package org.opendatamesh.dpds.old;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
@@ -13,7 +13,7 @@ import org.opendatamesh.dpds.parser.ParseOptions;
 import org.opendatamesh.dpds.location.DescriptorLocation;
 import org.opendatamesh.dpds.location.UriLocation;
 import org.opendatamesh.dpds.location.UriUtils;
-import org.opendatamesh.dpds.utils.DPDSTestResources;
+import org.opendatamesh.dpds.old.utils.DPDSTestResources;
 import org.opendatamesh.dpds.utils.ObjectMapperFactory;
 
 import java.io.IOException;

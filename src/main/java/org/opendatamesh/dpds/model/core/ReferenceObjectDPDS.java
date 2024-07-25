@@ -25,12 +25,9 @@ public class ReferenceObjectDPDS {
     @Schema(description = "Reference Object reference", required = true)
     private String ref;
 
-    @JsonIgnore
     @Schema(description = "Reference Object base URI", required = true)
     private URI baseUri;
-    
-    @JsonIgnore
-    @EqualsAndHashCode.Exclude
+
     @Schema(description = "Reference Object raw content", required = true)
     protected String rawContent;
 
