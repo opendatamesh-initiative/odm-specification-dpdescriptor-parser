@@ -1,5 +1,5 @@
 {
-  "rawDPDS": {
+  "rawInput": {
     "dataProductDescriptor": "1.0.0",
     "info": {
       "fullyQualifiedName": "urn:org.opendatamesh:dataproducts:domain-name:subdomain:dp-name-dps",
@@ -834,7 +834,7 @@
       ]
     }
   },
-  "expectedDataProductVersionDPDS": {
+  "expectedResult": {
     "dataProductDescriptor": "1.0.0",
     "info": {
       "id": "bed1088c-78bd-324b-8750-93de52a81d89",
@@ -861,6 +861,9 @@
     "interfaceComponents": {
       "inputPorts": [
         {
+          "baseUri": null,
+          "originalRef": null,
+          "rawContent": "{\"fullyQualifiedName\":\"urn:org.opendatamesh:dataproducts:domain-name:subdomain:dp-name-dps:1.0.0:inputports:iport1:1.0.0\",\"name\":\"iport1\",\"version\":\"1.0.0\",\"displayName\":\"IPort1\",\"description\":\"Read data from the IPort1 apis for the Domain application\",\"componentGroup\":null,\"x-prop\":null,\"promises\":{\"subdomain\":\"azure:westeurope\",\"servicesType\":\"rest-services\",\"deprecationPolicy\":null,\"slo\":null},\"expectations\":{\"audience\":null,\"usage\":null},\"contracts\":{\"termsAndConditions\":null,\"billingPolicy\":null,\"sla\":null},\"tags\":[],\"entityType\":\"inputport\",\"id\":\"c7ba5b85-9bc5-399b-9910-ea3f94b74c87\"}",
           "externalReference": false,
           "id": "c7ba5b85-9bc5-399b-9910-ea3f94b74c87",
           "fullyQualifiedName": "urn:org.opendatamesh:dataproducts:domain-name:subdomain:dp-name-dps:1.0.0:inputports:iport1:1.0.0",
@@ -877,6 +880,9 @@
             "platform": null,
             "servicesType": "rest-services",
             "api": {
+              "baseUri": null,
+              "originalRef": null,
+              "rawContent": "{\"name\":\"iport1Api\",\"specification\":\"openapi\",\"specificationVersion\":\"3.0.1\",\"entityType\":\"api\",\"fullyQualifiedName\":\"urn:org.opendatamesh:apis:iport1Api:1.0.0\",\"id\":\"0d6179ad-cc7d-37b0-9b8a-902837fc2ccb\"}",
               "externalReference": false,
               "id": "0d6179ad-cc7d-37b0-9b8a-902837fc2ccb",
               "fullyQualifiedName": "urn:org.opendatamesh:apis:iport1Api:1.0.0",
@@ -892,6 +898,7 @@
               "specification": "openapi",
               "specificationVersion": "3.0.1",
               "definition": {
+                "rawContent": "{\"openapi\":\"3.0.1\",\"info\":{\"title\":\"OpenAPI definition\",\"version\":\"1.0.1\"},\"servers\":[{\"url\":\"https://iport1.com\",\"description\":\"IPort1 Main server\"}],\"paths\":{\"/api/v1/iport/endpoint1\":{\"post\":{\"tags\":[\"\"],\"operationId\":\"getEndpoint1\",\"parameters\":[{\"name\":\"param\",\"in\":\"query\",\"required\":true,\"schema\":{\"type\":\"object\",\"properties\":{\"page\":{\"minimum\":0,\"type\":\"integer\",\"format\":\"int32\"},\"size\":{\"minimum\":1,\"type\":\"integer\",\"format\":\"int32\"},\"sort\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}}}},{\"name\":\"User-Agent\",\"in\":\"header\",\"description\":\"User agent string\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"X-App-Name\",\"in\":\"header\",\"description\":\"Caller application name\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"X-App-Version\",\"in\":\"header\",\"description\":\"Caller application version\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"X-Request-ID\",\"in\":\"header\",\"description\":\"Unique request identifier\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"X-Correlation-ID\",\"in\":\"header\",\"description\":\"correlation identifier\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"Accept-Language\",\"in\":\"header\",\"description\":\"\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"itemId\":{\"type\":\"string\"},\"ownerId\":{\"type\":\"string\"},\"countryCode\":{\"type\":\"string\"},\"identifier\":{\"type\":\"string\"}}}}},\"required\":true},\"responses\":{\"400\":{\"description\":\"Bad Request\",\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\"},\"message\":{\"type\":\"string\"}}},{\"type\":\"object\"}]}}}},\"415\":{\"description\":\"Unsupported Media Type\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\"}}}},\"404\":{\"description\":\"Not Found\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\"},\"message\":{\"type\":\"string\"}}}}}},\"500\":{\"description\":\"Internal Server Error\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\"},\"message\":{\"type\":\"string\"}}}}}},\"200\":{\"description\":\"OK\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"elem1\":{\"type\":\"integer\",\"format\":\"int64\"},\"elem2\":{\"type\":\"integer\",\"format\":\"int32\"},\"elem3\":{\"type\":\"boolean\"},\"elem4\":{\"type\":\"boolean\"},\"elem5\":{\"type\":\"boolean\"}}}}}}}}},\"/api/v1/iport/{param}/endpoint2\":{\"get\":{\"tags\":[\"custom\"],\"operationId\":\"op\",\"parameters\":[{\"name\":\"param\",\"in\":\"path\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"param2\",\"in\":\"query\",\"required\":false,\"schema\":{\"type\":\"boolean\",\"default\":false}},{\"name\":\"User-Agent\",\"in\":\"header\",\"description\":\"User agent string\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"X-App-Name\",\"in\":\"header\",\"description\":\"Caller application name\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"X-App-Version\",\"in\":\"header\",\"description\":\"Caller application version\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"X-Request-ID\",\"in\":\"header\",\"description\":\"Unique request identifier\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"X-Correlation-ID\",\"in\":\"header\",\"description\":\"correlation identifier\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"name\":\"Accept-Language\",\"in\":\"header\",\"description\":\"\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"responses\":{\"400\":{\"description\":\"Bad Request\",\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\"},\"message\":{\"type\":\"string\"}}},{\"type\":\"object\"}]}}}},\"415\":{\"description\":\"Unsupported Media Type\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\"}}}},\"404\":{\"description\":\"Not Found\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\"},\"message\":{\"type\":\"string\"}}}}}},\"500\":{\"description\":\"Internal Server Error\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"string\",\"format\":\"date-time\"},\"message\":{\"type\":\"string\"}}}}}},\"200\":{\"description\":\"OK\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"value1\":{\"type\":\"string\"},\"value2\":{\"type\":\"string\",\"enum\":[\"enum1\",\"enum2\"]},\"tyvalue3\":{\"type\":\"string\",\"enum\":[\"enum1\",\"enum2\"]},\"value4\":{\"type\":\"string\"},\"value5\":{\"type\":\"string\"},\"value6\":{\"type\":\"string\"},\"value7\":{\"type\":\"string\"},\"value8\":{\"type\":\"string\"},\"value9\":{\"type\":\"string\"},\"value10\":{\"type\":\"string\"},\"value11\":{\"type\":\"string\"},\"value12\":{\"type\":\"string\"},\"value13\":{\"type\":\"string\"},\"value14\":{\"type\":\"number\"},\"value15\":{\"type\":\"number\"}}}}}}}}}}}}",
                 "inline": true,
                 "resolvedRef": false,
                 "description": null,
@@ -913,6 +920,9 @@
       ],
       "outputPorts": [
         {
+          "baseUri": null,
+          "originalRef": null,
+          "rawContent": "{\"fullyQualifiedName\":\"urn:org.opendatamesh:dataproducts:domain-name:subdomain:dp-name-dps:1.0.0:outputports:oport1:1.0.0\",\"name\":\"oport1\",\"version\":\"1.0.0\",\"displayName\":\"Oport1\",\"description\":\"\",\"componentGroup\":null,\"x-prop\":null,\"promises\":{\"subdomain\":\"azure:westeurope:confluent\",\"servicesType\":\"streaming-services\"},\"deprecationPolicy\":{\"description\":\"When a new major version becomes available, the previous one is kept online for 7 days.\",\"x-deprecation-period\":\"7D\",\"x-dp-prop-2\":\"\",\"externalDocs\":{\"description\":\"The previous version of the topic is retained for the deprecation period.\",\"mediaType\":\"text/html\",\"$href\":\"\"}},\"slo\":null,\"expectations\":null,\"contracts\":null,\"tags\":[],\"entityType\":\"outputport\",\"id\":\"cfd1427c-00f3-3e1f-a00a-14d9fae9209c\"}",
           "externalReference": false,
           "id": "cfd1427c-00f3-3e1f-a00a-14d9fae9209c",
           "fullyQualifiedName": "urn:org.opendatamesh:dataproducts:domain-name:subdomain:dp-name-dps:1.0.0:outputports:oport1:1.0.0",
@@ -929,6 +939,9 @@
             "platform": null,
             "servicesType": "streaming-services",
             "api": {
+              "baseUri": null,
+              "originalRef": null,
+              "rawContent": "{\"name\":\"databus\",\"specification\":\"asyncapi\",\"specificationVersion\":\"3.0.0\",\"entityType\":\"api\",\"fullyQualifiedName\":\"urn:org.opendatamesh:apis:databus:1.0.0\",\"id\":\"289a62fc-6227-3843-b155-29ff72179294\"}",
               "externalReference": false,
               "id": "289a62fc-6227-3843-b155-29ff72179294",
               "fullyQualifiedName": "urn:org.opendatamesh:apis:databus:1.0.0",
@@ -944,6 +957,7 @@
               "specification": "asyncapi",
               "specificationVersion": "3.0.0",
               "definition": {
+                "rawContent": "{\"asyncapi\":\"3.0.0\",\"info\":{\"title\":\"databus 2\",\"version\":\"1.0.0\",\"description\":\"databus Communication bus.\",\"termsOfService\":\"https://asyncapi.org/terms/\",\"contact\":{\"name\":\"John Doe\",\"url\":\"\",\"email\":\"john.doe@email.com\"},\"externalDocs\":{\"description\":\"databus\",\"url\":\"https://databus_example.com\"},\"tags\":[]},\"servers\":{\"development\":{\"host\":\"databus.cloud:1234\",\"description\":\"\",\"protocol\":\"kafka\",\"protocolVersion\":\"\",\"tags\":[{\"name\":\"env:development\",\"description\":\"This environment is meant for developers to run their own tests.\"}]}},\"channels\":{\"topic1\":{\"address\":\"topic1.example.v1\",\"title\":\"Topic1\",\"description\":\"\",\"servers\":[{\"$ref\":\"#/servers/development\"}],\"messages\":{\"topic1V1\":{\"$ref\":\"#/components/messages/topic1V1\"}},\"tags\":[]}},\"components\":{\"messages\":{\"topic1V1\":{\"name\":\"topic1V1\",\"title\":\"topic1 V1\",\"summary\":\"Message on topic topic1.\",\"description\":\"\",\"contentType\":\"application/json\",\"tags\":[],\"headers\":{\"type\":\"object\",\"properties\":{}},\"payload\":{\"schemaFormat\":\"application/schema+json;version=draft-07\",\"schema\":{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"javaType\":\"topic.example.topic1V1\",\"allOf\":[{\"$ref\":\"https://raw.githubusercontent.com/cloudevents/spec/v1.0.2/cloudevents/formats/cloudevents.json\"}],\"extends\":{\"$ref\":\"https://raw.githubusercontent.com/cloudevents/spec/v1.0.2/cloudevents/formats/cloudevents.json\"},\"properties\":{\"data\":{\"additionalProperties\":false,\"javaType\":\"topic.example.topic1V1Data\",\"description\":\"\",\"properties\":{\"prop1\":{\"type\":\"string\",\"format\":\"uuid\",\"description\":\"\"},\"prop2\":{\"type\":\"string\",\"format\":\"uuid\",\"description\":\"\"},\"prop3\":{\"type\":\"string\",\"format\":\"uuid\",\"description\":\"\"},\"prop4\":{\"type\":\"string\",\"description\":\"\"}},\"required\":[\"prop1\"]}}}}},\"correlationId\":{},\"traits\":[],\"examples\":[]}}}",
                 "inline": true,
                 "resolvedRef": false,
                 "description": null,
@@ -960,6 +974,9 @@
           "obligations": null
         },
         {
+          "baseUri": null,
+          "originalRef": null,
+          "rawContent": "{\"fullyQualifiedName\":\"urn:org.opendatamesh:dataproducts:domain-name:subdomain:dp-name-dps:1.0.0:outputports:oport2:1.0.0\",\"name\":\"oport2\",\"version\":\"1.0.0\",\"displayName\":\"Oport2\",\"description\":\"\",\"componentGroup\":null,\"x-prop\":null,\"promises\":{\"subdomain\":\"azure:westeurope:confluent\",\"servicesType\":\"streaming-services\"},\"deprecationPolicy\":{\"description\":\"When a new major version becomes available, the previous one is kept online for 7 days.\",\"x-deprecation-period\":\"7D\",\"x-dp-prop-2\":\"\",\"externalDocs\":{\"description\":\"The previous version of the topic is retained for the deprecation period.\",\"mediaType\":\"text/html\",\"$href\":\"\"}},\"slo\":null,\"expectations\":null,\"contracts\":null,\"tags\":[],\"entityType\":\"outputport\",\"id\":\"c43bee33-643a-3b7a-b168-93ce1616e71c\"}",
           "externalReference": false,
           "id": "c43bee33-643a-3b7a-b168-93ce1616e71c",
           "fullyQualifiedName": "urn:org.opendatamesh:dataproducts:domain-name:subdomain:dp-name-dps:1.0.0:outputports:oport2:1.0.0",
@@ -976,6 +993,9 @@
             "platform": null,
             "servicesType": "streaming-services",
             "api": {
+              "baseUri": null,
+              "originalRef": null,
+              "rawContent": "{\"name\":\"databus\",\"specification\":\"asyncapi\",\"specificationVersion\":\"3.0.0\",\"entityType\":\"api\",\"fullyQualifiedName\":\"urn:org.opendatamesh:apis:databus:1.0.0\",\"id\":\"289a62fc-6227-3843-b155-29ff72179294\"}",
               "externalReference": false,
               "id": "289a62fc-6227-3843-b155-29ff72179294",
               "fullyQualifiedName": "urn:org.opendatamesh:apis:databus:1.0.0",
@@ -991,6 +1011,7 @@
               "specification": "asyncapi",
               "specificationVersion": "3.0.0",
               "definition": {
+                "rawContent": "{\"asyncapi\":\"3.0.0\",\"info\":{\"title\":\"databus\",\"version\":\"1.0.0\",\"description\":\"databus.\",\"termsOfService\":\"https://asyncapi.org/terms/\",\"contact\":{\"name\":\"John Doe\",\"url\":\"\",\"email\":\"john.doe@email.com\"},\"externalDocs\":{\"description\":\"databus Official Documentation\",\"url\":\"https:example-doc.com\"},\"tags\":[]},\"servers\":{\"development\":{\"host\":\"databus.cloud:1234\",\"description\":\"\",\"protocol\":\"kafka\",\"protocolVersion\":\"\",\"tags\":[{\"name\":\"env:development\",\"description\":\"This environment is meant for developers to run their own tests.\"}]}},\"channels\":{\"topic2\":{\"address\":\"topic2.example.v1\",\"title\":\"topic2\",\"description\":\"topic2.\",\"servers\":[{\"$ref\":\"#/servers/development\"}],\"messages\":{\"topic2V1\":{\"$ref\":\"#/components/messages/topic2V1\"}},\"tags\":[]}},\"components\":{\"messages\":{\"topic2V1\":{\"name\":\"topic2V1\",\"title\":\"topic2 V1\",\"summary\":\"Message on topic topic2.\",\"description\":\"\",\"contentType\":\"application/json\",\"tags\":[],\"headers\":{\"type\":\"object\",\"properties\":{}},\"payload\":{\"schemaFormat\":\"application/schema+json;version=draft-07\",\"schema\":{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"javaType\":\"ctopic.example.topic2V1\",\"allOf\":[{\"$ref\":\"https://raw.githubusercontent.com/cloudevents/spec/v1.0.2/cloudevents/formats/cloudevents.json\"}],\"extends\":{\"$ref\":\"https://raw.githubusercontent.com/cloudevents/spec/v1.0.2/cloudevents/formats/cloudevents.json\"},\"properties\":{\"data\":{\"additionalProperties\":false,\"javaType\":\"topic.example.topic2V1Data\",\"description\":\"\",\"properties\":{\"prop200\":{\"type\":\"string\",\"format\":\"uuid\",\"description\":\"\"},\"prop201\":{\"type\":\"string\",\"format\":\"uuid\",\"description\":\"\"},\"prop202\":{\"type\":\"string\",\"format\":\"uuid\",\"description\":\"\"},\"prop203\":{\"type\":\"string\",\"description\":\"\"}},\"required\":[\"prop200\"]}}}}},\"correlationId\":{},\"traits\":[],\"examples\":[]}}}",
                 "inline": true,
                 "resolvedRef": false,
                 "description": null,

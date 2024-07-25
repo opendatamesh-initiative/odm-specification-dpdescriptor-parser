@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class TestResource {
-    private ObjectNode rawDPDS;
-    private ObjectNode expectedDataProductVersionDPDS;
+    private ObjectNode rawInput;
+    private ObjectNode expectedResult;
 }

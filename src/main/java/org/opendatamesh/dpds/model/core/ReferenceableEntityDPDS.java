@@ -19,10 +19,8 @@ public abstract class ReferenceableEntityDPDS extends EntityDPDS {
     @JsonProperty("$ref")
     protected String ref;
 
-    @JsonIgnore
     protected URI baseUri;
 
-    @JsonIgnore
     protected String originalRef;
 
     @JsonIgnore
