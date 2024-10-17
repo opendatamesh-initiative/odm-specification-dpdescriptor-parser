@@ -1,14 +1,11 @@
 package org.opendatamesh.dpds.model.internals;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.*;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class LifecycleInfoDPDS {
 
     @Schema(description = "List of Lifecycle Task Info objects of the Lifecycle Info", required = true)
@@ -18,16 +15,14 @@ public class LifecycleInfoDPDS {
         tasksInfo = new ArrayList<LifecycleTaskInfoDPDS>();
     }   
 
-    @JsonIgnore
-    public Set<String> getStageNames() {
-        Set<String> stageNames = new HashSet<String>();
+    public SortedSet<String> getStageNames() {
+        SortedSet<String> stageNames = new TreeSet<>();
         for(LifecycleTaskInfoDPDS taskInfo: tasksInfo) {
             stageNames.add(taskInfo.getStageName());
         }
         return stageNames;
     }
 
-    @JsonIgnore
     public List<LifecycleTaskInfoDPDS> getTasksInfo(String stageName) {
 
         List<LifecycleTaskInfoDPDS> stageTasksInfo = new ArrayList<LifecycleTaskInfoDPDS>();
