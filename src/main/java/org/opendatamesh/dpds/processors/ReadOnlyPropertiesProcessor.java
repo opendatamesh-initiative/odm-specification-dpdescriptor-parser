@@ -110,7 +110,6 @@ class ReadOnlyPropertiesProcessor implements PropertiesProcessor {
                         + "] for field fullyQualifiedName in infoObject. Expected [" + fqn + "]");
             }
         }
-        //TODO this should be rethinked
         //Avoids overriding fqn if already declared inside the descriptor
         if (context.getOptions().isRewriteFqn() && infoNode.get("fullyQualifiedName") == null) {
             descriptor.getInfo().setFullyQualifiedName(fqn);
