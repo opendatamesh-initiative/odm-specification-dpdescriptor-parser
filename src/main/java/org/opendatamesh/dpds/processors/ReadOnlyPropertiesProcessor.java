@@ -233,7 +233,7 @@ class ReadOnlyPropertiesProcessor implements PropertiesProcessor {
                         + fqn + "]");
             }
         }
-        if (context.getOptions().isRewriteFqn()) {
+        if (context.getOptions().isRewriteFqn() && componentNode.get("fullyQualifiedName") == null) {
             component.setFullyQualifiedName(fqn);
             componentNode.put("fullyQualifiedName", fqn);
         }
