@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.opendatamesh.dpds.model.core.SpecificationExtensionPointDPDS;
+import org.opendatamesh.dpds.visitors.interfaces.PortDPDSVisitor;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,8 +18,12 @@ public class ObligationsDPDS {
     @JsonProperty("billingPolicy")
     @Schema(description = "Obligations billing policy", required = true)
     protected SpecificationExtensionPointDPDS billingPolicy;
-   
+
     @JsonProperty("sla")
     @Schema(description = "Specification Extension Point of the Obligations", required = true)
     protected SpecificationExtensionPointDPDS sla;
+
+    public void accept(PortDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 }

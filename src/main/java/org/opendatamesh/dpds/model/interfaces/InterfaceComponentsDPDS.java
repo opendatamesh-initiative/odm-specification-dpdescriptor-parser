@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.opendatamesh.dpds.model.core.EntityTypeDPDS;
 import org.opendatamesh.dpds.model.core.ComponentContainerDPDS;
+import org.opendatamesh.dpds.visitors.DataProductVersionDPDSVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,10 @@ public class InterfaceComponentsDPDS extends ComponentContainerDPDS{
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Schema(description = "List of the control Ports of the Interface Components", required = true)
     private List<PortDPDS> controlPorts = new ArrayList<PortDPDS>();
+
+    public void accept(DataProductVersionDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 
     public boolean hasPorts(EntityTypeDPDS entityType) {
         List<PortDPDS> ports = getPortListByEntityType(entityType);

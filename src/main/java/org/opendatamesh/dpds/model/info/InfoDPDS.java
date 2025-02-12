@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.opendatamesh.dpds.visitors.DataProductVersionDPDSVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,10 @@ public class InfoDPDS implements Cloneable {
     @JsonAnySetter
     public void ignored(String name, Object value) {
         System.out.println(name + " : " + value + " : " + value.getClass().getName());
+    }
+
+    public void accept(DataProductVersionDPDSVisitor visitor) {
+        visitor.visit(this);
     }
 
     public InfoDPDS() {

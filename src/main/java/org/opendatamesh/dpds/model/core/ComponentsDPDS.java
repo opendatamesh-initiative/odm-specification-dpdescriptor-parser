@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import org.opendatamesh.dpds.model.interfaces.PortDPDS;
 import org.opendatamesh.dpds.model.internals.ApplicationComponentDPDS;
 import org.opendatamesh.dpds.model.internals.InfrastructuralComponentDPDS;
+import org.opendatamesh.dpds.visitors.DataProductVersionDPDSVisitor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +56,10 @@ public class ComponentsDPDS extends ComponentContainerDPDS {
     @JsonProperty("templates")
     @Schema(description = "Key-value list of template Standard Definitions of the Component")
     private Map<String, StandardDefinitionDPDS> templates = new HashMap<>();
+
+    public void accept(DataProductVersionDPDSVisitor visitor){
+        visitor.visit(this);
+    }
 
     @SuppressWarnings("unchecked")
     public <E extends ComponentDPDS> Map<String, E> getComponentsByEntityType(EntityTypeDPDS type) {
