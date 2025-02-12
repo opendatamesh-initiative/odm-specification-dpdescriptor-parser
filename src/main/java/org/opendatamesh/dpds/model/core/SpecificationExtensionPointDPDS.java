@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.opendatamesh.dpds.visitors.interfaces.ExpectationsDPDSVisitor;
+import org.opendatamesh.dpds.visitors.interfaces.ObligationsDPDSVisitor;
+import org.opendatamesh.dpds.visitors.interfaces.PromisesDPDSVisitor;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,4 +18,16 @@ public class SpecificationExtensionPointDPDS {
     @JsonProperty("externalDocs")
     @Schema(description = "Document of the External Resource of the Specification Extension Point", required = true)
     private ExternalResourceDPDS externalDocs;
+
+    public void accept(PromisesDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    public void accept(ExpectationsDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    public void accept(ObligationsDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 }

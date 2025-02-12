@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.opendatamesh.dpds.visitors.core.StandardDefinitionDPDSVisitor;
 
 import java.net.URI;
 import java.util.List;
@@ -19,4 +20,10 @@ public class ApiDefinitionReferenceDPDS extends DefinitionReferenceDPDS {
 
     @JsonProperty("endpoints")
     List<ApiDefinitionEndpointDPDS> endpoints;
+
+    @Override
+    public void accept(StandardDefinitionDPDSVisitor visitor) {
+        super.accept(visitor);
+        visitor.visit(this);
+    }
 }

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.opendatamesh.dpds.model.core.SpecificationExtensionPointDPDS;
 import org.opendatamesh.dpds.model.core.StandardDefinitionDPDS;
+import org.opendatamesh.dpds.visitors.interfaces.PortDPDSVisitor;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -31,4 +32,8 @@ public class PromisesDPDS {
     @JsonProperty("slo")
     @Schema(description = "Specification Extension Point object of the slo of the Promises", required = true)
     protected SpecificationExtensionPointDPDS slo;
+
+    public void accept(PortDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 }

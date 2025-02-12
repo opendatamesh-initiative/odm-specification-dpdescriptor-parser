@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.opendatamesh.dpds.model.core.ComponentDPDS;
+import org.opendatamesh.dpds.visitors.core.ComponentsDPDSVisitor;
+import org.opendatamesh.dpds.visitors.internals.InternalComponentsDPDSVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,4 +37,11 @@ public class ApplicationComponentDPDS extends ComponentDPDS {
     @Schema(description = "List of Application Component dependencies", required = true)
     private List<String> dependsOn = new ArrayList<String>();
 
+    public void accept(InternalComponentsDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    public void accept(ComponentsDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 }

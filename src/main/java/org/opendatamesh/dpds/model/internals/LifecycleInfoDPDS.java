@@ -2,6 +2,7 @@ package org.opendatamesh.dpds.model.internals;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.opendatamesh.dpds.visitors.internals.InternalComponentsDPDSVisitor;
 
 import java.util.*;
 
@@ -14,6 +15,10 @@ public class LifecycleInfoDPDS {
     public LifecycleInfoDPDS() {
         tasksInfo = new ArrayList<LifecycleTaskInfoDPDS>();
     }   
+
+    public void accept(InternalComponentsDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 
     public SortedSet<String> getStageNames() {
         SortedSet<String> stageNames = new TreeSet<>();

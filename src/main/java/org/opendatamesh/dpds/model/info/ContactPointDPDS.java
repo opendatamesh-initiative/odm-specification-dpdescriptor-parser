@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.opendatamesh.dpds.visitors.info.InfoDDPDSVisitor;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -24,4 +25,8 @@ public class ContactPointDPDS {
     @JsonProperty("address")
     @Schema(description = "Address to contact the Contact Point", required = true)
     private String address;
+
+    public void accept(InfoDDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 }

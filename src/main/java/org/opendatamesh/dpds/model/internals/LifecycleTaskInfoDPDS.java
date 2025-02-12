@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.opendatamesh.dpds.model.core.ExternalResourceDPDS;
 import org.opendatamesh.dpds.model.core.StandardDefinitionDPDS;
+import org.opendatamesh.dpds.visitors.internals.LifecycleInfoDPDSVisitor;
 
 import java.util.Map;
 
@@ -38,6 +39,10 @@ public class LifecycleTaskInfoDPDS {
     @Schema(description = "Raw Content of the task")
     @JsonProperty("rawContent")
     String rawContent;
+
+    public void accept(LifecycleInfoDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 
     public boolean hasTemplate() {
         return template != null;

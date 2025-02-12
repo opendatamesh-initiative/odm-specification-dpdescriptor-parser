@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.opendatamesh.dpds.model.core.ComponentDPDS;
+import org.opendatamesh.dpds.visitors.core.ComponentsDPDSVisitor;
+import org.opendatamesh.dpds.visitors.interfaces.InterfaceComponentsDPDSVisitor;
 
 
 @Data
@@ -25,6 +27,14 @@ public class PortDPDS extends ComponentDPDS {
     @Schema(description = "Obligations object of the Port")
     protected ObligationsDPDS obligations;
 
+    public void accept(InterfaceComponentsDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    public void accept(ComponentsDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
+
     public boolean hasPromises() {
         return promises != null;
     }
@@ -34,7 +44,7 @@ public class PortDPDS extends ComponentDPDS {
     }
 
     public boolean hasApiDefinition() {
-        return hasApi() && promises.getApi().getDefinition() != null;
+        return hasApi() && promises.getApi().getUntypedDefinition() != null;
     }
 
 }

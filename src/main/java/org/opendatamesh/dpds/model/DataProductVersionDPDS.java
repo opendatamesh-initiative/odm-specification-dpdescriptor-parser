@@ -61,15 +61,15 @@ public class DataProductVersionDPDS implements Cloneable {
     }
 
     public boolean hasInterfaceComponents() {
-        return interfaceComponents != null;    
+        return interfaceComponents != null;
     }
 
     public boolean hasInternalComponents() {
-        return internalComponents != null;    
+        return internalComponents != null;
     }
 
-     public boolean hasComponents() {
-        return components != null;    
+    public boolean hasComponents() {
+        return components != null;
     }
 
     public boolean hasLifecycleInfo() {

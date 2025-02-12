@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.opendatamesh.dpds.model.core.ComponentContainerDPDS;
+import org.opendatamesh.dpds.visitors.DataProductVersionDPDSVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,10 @@ public class InternalComponentsDPDS extends ComponentContainerDPDS{
     @JsonProperty("lifecycleInfo")
     @Schema(description = "Lifecycle Info object of the Internal Components")
     private LifecycleInfoDPDS lifecycleInfo;
+
+    public void accept(DataProductVersionDPDSVisitor visitor) {
+        visitor.visit(this);
+    }
 
     public boolean hasLifecycleInfo() {
         return lifecycleInfo != null;
