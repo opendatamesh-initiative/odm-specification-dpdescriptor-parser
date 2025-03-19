@@ -28,7 +28,7 @@ License.
     <artifactId>odm-specification-dpdescriptor-parser</artifactId>
     <name>ODM Specification Data Product Descriptor Parser</name>
     <description>Specification Parser for Data Product Descriptor of Open Data Mesh</description>
-    <version>1.0.6</version>
+    <version>2.0.0</version>
 
     <distributionManagement>
         <repository>
@@ -63,32 +63,7 @@ License.
 
 
     <dependencies>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>32.1.1-jre</version>
-        </dependency>
-        <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>provided</scope>
-        </dependency>
 
-        <!-- Json Schema handling -->
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>1.0.72</version>
-        </dependency>
-
-        <!-- YAML & JSON handling -->
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>2.0</version>
-        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -110,32 +85,6 @@ License.
             <version>2.15.1</version>
         </dependency>
 
-        <!-- Swagger -->
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-
-        <!-- Commons -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jgit</groupId>
-            <artifactId>org.eclipse.jgit</artifactId>
-            <version>6.6.0.202305301015-r</version>
-        </dependency>
-        <dependency> <!-- Enable SSH transport -->
-            <groupId>org.eclipse.jgit</groupId>
-            <artifactId>org.eclipse.jgit.ssh.apache</artifactId>
-            <version>6.6.0.202305301015-r</version>
-        </dependency>
-
-
         <!-- Test -->
         <dependency>
             <groupId>org.assertj</groupId>
@@ -154,6 +103,17 @@ License.
             <artifactId>junit-jupiter</artifactId>
             <version>5.8.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.0.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
