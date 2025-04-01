@@ -1,0 +1,20 @@
+{
+  "dataProductDescriptor": "1.0.0",
+  "dumb_extension": {
+    "fieldA": "valueA",
+    "fieldB": "valueB"
+  },
+  "x-prop": "x-prop-value",
+  "info": {
+    "x-prop": "x-prop-value",
+    "name": "dpdCore",
+    "version": "1.0.0",
+    "displayName": "Test Product",
+    "description": "This is a test product that contains the core configurations blocks",
+    "domain": "testDomain",
+    "owner": {
+      "id": "john.doe@company-xyz.com",
+      "name": "John Doe"
+    }
+  }
+}
