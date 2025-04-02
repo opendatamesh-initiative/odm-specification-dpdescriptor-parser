@@ -1,0 +1,54 @@
+{
+  "dataProductDescriptor": "1.0.0",
+  "x-prop": "x-prop-value",
+  "info": {
+    "name": "dpdCore",
+    "version": "1.0.0",
+    "displayName": "Test Product",
+    "description": "This is a test product that contains the core configurations blocks",
+    "domain": "testDomain",
+    "owner": {
+      "id": "john.doe@company-xyz.com",
+      "name": "John Doe"
+    }
+  },
+  "interfaceComponents": {
+    "outputPorts": [
+      {
+        "fullyQualifiedName": "urn:dpds:demo:dataproducts:test:1:1.0.0:outputPorts:outputPortName",
+        "name": "outputPortName",
+        "version": "1.0.0",
+        "displayName": "outputPortDisplayName",
+        "description": "outputPortDescription",
+        "promises": {
+          "api": {
+            "specification": "my_specification",
+            "specificationVersion": "1.0.0",
+            "definition": {
+              "mySpecField1": "mySpecValue1",
+              "mySpecField2": "mySpecValue2",
+              "mySpecField3": "mySpecValue3",
+              "x-prop": "value"
+            }
+          }
+        }
+      },
+      {
+        "fullyQualifiedName": "urn:dpds:demo:dataproducts:test:1:1.0.0:outputPorts:outputPortName2",
+        "name": "outputPortName2",
+        "version": "1.0.0",
+        "displayName": "outputPortDisplayName2",
+        "description": "outputPortDescription2",
+        "promises": {
+          "api": {
+            "specification": "another_specification",
+            "specificationVersion": "1.0.0",
+            "definition": {
+              "anotherSpecificationField": "anotherSpecificationValue"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
