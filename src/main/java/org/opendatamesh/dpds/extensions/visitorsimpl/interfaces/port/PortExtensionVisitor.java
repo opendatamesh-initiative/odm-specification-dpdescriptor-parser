@@ -4,7 +4,6 @@ import org.opendatamesh.dpds.extensions.visitorsimpl.ExtensionVisitor;
 import org.opendatamesh.dpds.model.core.ExternalDocs;
 import org.opendatamesh.dpds.model.interfaces.Expectations;
 import org.opendatamesh.dpds.model.interfaces.Obligations;
-import org.opendatamesh.dpds.model.interfaces.Port;
 import org.opendatamesh.dpds.model.interfaces.Promises;
 import org.opendatamesh.dpds.visitors.interfaces.port.ExpectationsVisitor;
 import org.opendatamesh.dpds.visitors.interfaces.port.ObligationsVisitor;
@@ -18,7 +17,7 @@ public class PortExtensionVisitor extends ExtensionVisitor implements PortVisito
 
     @Override
     public void visit(Obligations obligations) {
-        extensionHandler.handleComponentBaseExtension(obligations, Port.class);
+        extensionHandler.handleComponentBaseExtension(obligations, Obligations.class);
         ObligationsVisitor visitor = new ObligationsExtensionVisitor(this);
         if (obligations.getTermsAndConditions() != null) {
             visitor.visit(obligations.getTermsAndConditions());
@@ -33,7 +32,7 @@ public class PortExtensionVisitor extends ExtensionVisitor implements PortVisito
 
     @Override
     public void visit(Expectations expectations) {
-        extensionHandler.handleComponentBaseExtension(expectations, Port.class);
+        extensionHandler.handleComponentBaseExtension(expectations, Expectations.class);
         ExpectationsVisitor visitor = new ExpectationsExtensionVisitor(this);
         if (expectations.getAudience() != null) {
             visitor.visit(expectations.getAudience());
@@ -45,7 +44,7 @@ public class PortExtensionVisitor extends ExtensionVisitor implements PortVisito
 
     @Override
     public void visit(Promises promises) {
-        extensionHandler.handleComponentBaseExtension(promises, Port.class);
+        extensionHandler.handleComponentBaseExtension(promises, Promises.class);
         PromisesVisitor visitor = new PromisesExtensionVisitor(this);
         if (promises.getApi() != null) {
             visitor.visit(promises.getApi());
@@ -60,6 +59,6 @@ public class PortExtensionVisitor extends ExtensionVisitor implements PortVisito
 
     @Override
     public void visit(ExternalDocs externalDocs) {
-        extensionHandler.handleComponentBaseExtension(externalDocs, Port.class);
+        extensionHandler.handleComponentBaseExtension(externalDocs, ExternalDocs.class);
     }
 }

@@ -4,7 +4,6 @@ import org.opendatamesh.dpds.extensions.visitorsimpl.components.ComponentsExtens
 import org.opendatamesh.dpds.extensions.visitorsimpl.info.InfoExtensionVisitorImpl;
 import org.opendatamesh.dpds.extensions.visitorsimpl.interfaces.InterfaceComponentsExtensionVisitorImpl;
 import org.opendatamesh.dpds.extensions.visitorsimpl.internals.InternalComponentsExtensionVisitorImpl;
-import org.opendatamesh.dpds.model.DataProductVersion;
 import org.opendatamesh.dpds.model.components.Components;
 import org.opendatamesh.dpds.model.core.ExternalDocs;
 import org.opendatamesh.dpds.model.info.Info;
@@ -29,7 +28,7 @@ public class DataProductVersionExtensionVisitorImpl extends ExtensionVisitor imp
 
     @Override
     public void visit(Info info) {
-        extensionHandler.handleComponentBaseExtension(info, DataProductVersion.class);
+        extensionHandler.handleComponentBaseExtension(info, Info.class);
         InfoVisitor infoVisitor = new InfoExtensionVisitorImpl(this);
         if (info.getOwner() != null) {
             infoVisitor.visit(info.getOwner());
@@ -41,7 +40,7 @@ public class DataProductVersionExtensionVisitorImpl extends ExtensionVisitor imp
 
     @Override
     public void visit(InterfaceComponents interfaceComponents) {
-        extensionHandler.handleComponentBaseExtension(interfaceComponents, DataProductVersion.class);
+        extensionHandler.handleComponentBaseExtension(interfaceComponents, InterfaceComponents.class);
         InterfaceComponentsVisitor visitor = new InterfaceComponentsExtensionVisitorImpl(this);
         Stream.of(
                         interfaceComponents.getInputPorts(),
@@ -57,7 +56,7 @@ public class DataProductVersionExtensionVisitorImpl extends ExtensionVisitor imp
 
     @Override
     public void visit(InternalComponents internalComponents) {
-        extensionHandler.handleComponentBaseExtension(internalComponents, DataProductVersion.class);
+        extensionHandler.handleComponentBaseExtension(internalComponents, InternalComponents.class);
         InternalComponentsVisitor visitor = new InternalComponentsExtensionVisitorImpl(this);
         if (internalComponents.getApplicationComponents() != null) {
             internalComponents.getApplicationComponents().forEach(visitor::visit);
@@ -74,7 +73,7 @@ public class DataProductVersionExtensionVisitorImpl extends ExtensionVisitor imp
 
     @Override
     public void visit(Components components) {
-        extensionHandler.handleComponentBaseExtension(components, DataProductVersion.class);
+        extensionHandler.handleComponentBaseExtension(components, Components.class);
         ComponentsVisitor visitor = new ComponentsExtensionVisitorImpl(this);
         Stream.of(
                         components.getInputPorts(),
@@ -103,6 +102,6 @@ public class DataProductVersionExtensionVisitorImpl extends ExtensionVisitor imp
 
     @Override
     public void visit(ExternalDocs externalDocs) {
-        extensionHandler.handleComponentBaseExtension(externalDocs, DataProductVersion.class);
+        extensionHandler.handleComponentBaseExtension(externalDocs, ExternalDocs.class);
     }
 }

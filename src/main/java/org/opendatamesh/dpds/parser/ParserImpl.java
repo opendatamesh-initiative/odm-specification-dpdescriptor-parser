@@ -1,6 +1,5 @@
 package org.opendatamesh.dpds.parser;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opendatamesh.dpds.extensions.ComponentBaseExtendedConverter;
@@ -38,7 +37,7 @@ class ParserImpl implements Parser {
         if (!componentBaseExtendedConverters.isEmpty() || !definitionConverters.isEmpty()) {
             ExtensionHandler extensionHandler = new ExtensionHandler(DESERIALIZING, componentBaseExtendedConverters, definitionConverters, objectMapper);
             DataProductVersionVisitor visitor = new DataProductVersionExtensionVisitorImpl(extensionHandler);
-            extensionHandler.handleComponentBaseExtension(dataProductVersion, null);
+            extensionHandler.handleComponentBaseExtension(dataProductVersion, DataProductVersion.class);
             if (dataProductVersion.getInterfaceComponents() != null) {
                 visitor.visit(dataProductVersion.getInterfaceComponents());
             }
@@ -61,7 +60,7 @@ class ParserImpl implements Parser {
         if (!componentBaseExtendedConverters.isEmpty() || !definitionConverters.isEmpty()) {
             ExtensionHandler extensionHandler = new ExtensionHandler(SERIALIZING, componentBaseExtendedConverters, definitionConverters, objectMapper);
             DataProductVersionVisitor visitor = new DataProductVersionExtensionVisitorImpl(extensionHandler);
-            extensionHandler.handleComponentBaseExtension(dataProductVersion, null);
+            extensionHandler.handleComponentBaseExtension(dataProductVersion, DataProductVersion.class);
             if (dataProductVersion.getInterfaceComponents() != null) {
                 visitor.visit(dataProductVersion.getInterfaceComponents());
             }

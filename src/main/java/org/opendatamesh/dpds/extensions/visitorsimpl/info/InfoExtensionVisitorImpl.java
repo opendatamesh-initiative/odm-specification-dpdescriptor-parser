@@ -2,7 +2,6 @@ package org.opendatamesh.dpds.extensions.visitorsimpl.info;
 
 import org.opendatamesh.dpds.extensions.visitorsimpl.ExtensionVisitor;
 import org.opendatamesh.dpds.model.info.ContactPoint;
-import org.opendatamesh.dpds.model.info.Info;
 import org.opendatamesh.dpds.model.info.Owner;
 import org.opendatamesh.dpds.visitors.info.InfoVisitor;
 
@@ -14,11 +13,11 @@ public class InfoExtensionVisitorImpl extends ExtensionVisitor implements InfoVi
 
     @Override
     public void visit(Owner owner) {
-        extensionHandler.handleComponentBaseExtension(owner, Info.class);
+        extensionHandler.handleComponentBaseExtension(owner, Owner.class);
     }
 
     @Override
     public void visit(ContactPoint contactPoint) {
-        extensionHandler.handleComponentBaseExtension(contactPoint, Info.class);
+        extensionHandler.handleComponentBaseExtension(contactPoint, ContactPoint.class);
     }
 }

@@ -3,7 +3,6 @@ package org.opendatamesh.dpds.extensions.visitorsimpl.internals;
 import org.opendatamesh.dpds.extensions.visitorsimpl.ExtensionVisitor;
 import org.opendatamesh.dpds.model.internals.ApplicationComponent;
 import org.opendatamesh.dpds.model.internals.InfrastructuralComponent;
-import org.opendatamesh.dpds.model.internals.InternalComponents;
 import org.opendatamesh.dpds.model.internals.LifecycleTaskInfo;
 import org.opendatamesh.dpds.visitors.internals.ApplicationComponentVisitor;
 import org.opendatamesh.dpds.visitors.internals.InfrastructuralComponentVisitor;
@@ -17,7 +16,7 @@ public class InternalComponentsExtensionVisitorImpl extends ExtensionVisitor imp
 
     @Override
     public void visit(ApplicationComponent applicationComponent) {
-        extensionHandler.handleComponentBaseExtension(applicationComponent, InternalComponents.class);
+        extensionHandler.handleComponentBaseExtension(applicationComponent, ApplicationComponent.class);
         ApplicationComponentVisitor visitor = new ApplicationComponentExtensionVisitorImpl(this);
         if (applicationComponent.getExternalDocs() != null) {
             visitor.visit(applicationComponent.getExternalDocs());
@@ -26,7 +25,7 @@ public class InternalComponentsExtensionVisitorImpl extends ExtensionVisitor imp
 
     @Override
     public void visit(InfrastructuralComponent infrastructuralComponent) {
-        extensionHandler.handleComponentBaseExtension(infrastructuralComponent, InternalComponents.class);
+        extensionHandler.handleComponentBaseExtension(infrastructuralComponent, InfrastructuralComponent.class);
         InfrastructuralComponentVisitor visitor = new InfrastructuralComponentExtensionVisitorImpl(this);
         if (infrastructuralComponent.getExternalDocs() != null) {
             visitor.visit(infrastructuralComponent.getExternalDocs());
@@ -35,7 +34,7 @@ public class InternalComponentsExtensionVisitorImpl extends ExtensionVisitor imp
 
     @Override
     public void visit(LifecycleTaskInfo lifecycleTaskInfo) {
-        extensionHandler.handleComponentBaseExtension(lifecycleTaskInfo, InternalComponents.class);
+        extensionHandler.handleComponentBaseExtension(lifecycleTaskInfo, LifecycleTaskInfo.class);
         LifecycleTaskInfoVisitor visitor = new LifecycleTaskInfoExtensionVisitorImpl(this);
         if (lifecycleTaskInfo.getService() != null) {
             visitor.visit(lifecycleTaskInfo.getService());

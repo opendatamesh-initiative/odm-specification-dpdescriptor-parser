@@ -2,7 +2,6 @@ package org.opendatamesh.dpds.extensions.visitorsimpl.internals;
 
 import org.opendatamesh.dpds.extensions.visitorsimpl.ExtensionVisitor;
 import org.opendatamesh.dpds.model.core.ExternalDocs;
-import org.opendatamesh.dpds.model.internals.InfrastructuralComponent;
 import org.opendatamesh.dpds.visitors.internals.InfrastructuralComponentVisitor;
 
 public class InfrastructuralComponentExtensionVisitorImpl extends ExtensionVisitor implements InfrastructuralComponentVisitor {
@@ -12,6 +11,6 @@ public class InfrastructuralComponentExtensionVisitorImpl extends ExtensionVisit
 
     @Override
     public void visit(ExternalDocs externalDocs) {
-        extensionHandler.handleComponentBaseExtension(externalDocs, InfrastructuralComponent.class);
+        extensionHandler.handleComponentBaseExtension(externalDocs, ExternalDocs.class);
     }
 }

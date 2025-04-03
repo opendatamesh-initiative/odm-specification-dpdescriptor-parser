@@ -2,7 +2,6 @@ package org.opendatamesh.dpds.extensions.visitorsimpl.interfaces;
 
 import org.opendatamesh.dpds.extensions.visitorsimpl.ExtensionVisitor;
 import org.opendatamesh.dpds.extensions.visitorsimpl.interfaces.port.PortExtensionVisitor;
-import org.opendatamesh.dpds.model.interfaces.InterfaceComponents;
 import org.opendatamesh.dpds.model.interfaces.Port;
 import org.opendatamesh.dpds.visitors.interfaces.InterfaceComponentsVisitor;
 import org.opendatamesh.dpds.visitors.interfaces.port.PortVisitor;
@@ -14,7 +13,7 @@ public class InterfaceComponentsExtensionVisitorImpl extends ExtensionVisitor im
 
     @Override
     public void visit(Port port) {
-        extensionHandler.handleComponentBaseExtension(port, InterfaceComponents.class);
+        extensionHandler.handleComponentBaseExtension(port, Port.class);
         PortVisitor visitor = new PortExtensionVisitor(this);
         if (port.getPromises() != null) {
             visitor.visit(port.getPromises());

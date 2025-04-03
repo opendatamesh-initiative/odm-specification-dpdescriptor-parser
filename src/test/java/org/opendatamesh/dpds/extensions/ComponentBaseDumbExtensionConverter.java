@@ -3,13 +3,14 @@ package org.opendatamesh.dpds.extensions;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.opendatamesh.dpds.model.DataProductVersion;
 import org.opendatamesh.dpds.model.core.ComponentBase;
 
 class ComponentBaseDumbExtensionConverter implements ComponentBaseExtendedConverter<ComponentBaseDumbExtension> {
 
     @Override
     public boolean supports(String key, Class<? extends ComponentBase> parentClass) {
-        return parentClass == null && "dumb_extension".equalsIgnoreCase(key);
+        return parentClass == DataProductVersion.class && "dumb_extension".equalsIgnoreCase(key);
     }
 
     @Override
