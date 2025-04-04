@@ -35,7 +35,14 @@ jobs:
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Get Maven Properties
+        run: |
+          ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout | tail -n 1 | tr -d '\n')
+          GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout | tail -n 1 | tr -d '\n')
+          MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | tail -n 1 | tr -d '\n')
+          echo "ARTIFACT_ID=${ARTIFACT_ID}" >> $GITHUB_ENV
+          echo "GROUP_ID=${GROUP_ID}" >> $GITHUB_ENV
+          echo "MAVEN_VERSION=${MAVEN_VERSION}" >> $GITHUB_ENV
       - name: Publish package under 1x postfix
         run: |
           mvn deploy:deploy-file \
