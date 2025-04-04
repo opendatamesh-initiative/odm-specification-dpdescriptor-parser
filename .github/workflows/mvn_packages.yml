@@ -35,3 +35,16 @@ jobs:
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish package under 1x postfix
+        run: |
+          mvn deploy:deploy-file \
+            -DgroupId=${{ env.GROUP_ID }} \
+            -DartifactId=${{ env.ARTIFACT_ID }}-1x \
+            -Dversion=${{ env.MAVEN_VERSION }} \
+            -Dpackaging=jar \
+            -Dfile=target/${{ env.ARTIFACT_ID }}-${{ env.MAVEN_VERSION }}.jar \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
