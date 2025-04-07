@@ -9,10 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.opendatamesh.dpds.serde.LifecycleInfoDeserializer;
-import org.opendatamesh.dpds.serde.LifecycleTaskInfoDeserializer;
 import org.opendatamesh.dpds.model.internals.LifecycleInfoDPDS;
 import org.opendatamesh.dpds.model.internals.LifecycleTaskInfoDPDS;
+import org.opendatamesh.dpds.serde.LifecycleInfoDeserializer;
+import org.opendatamesh.dpds.serde.LifecycleTaskInfoDeserializer;
 
 public class ObjectMapperFactory {
 
@@ -25,6 +25,9 @@ public class ObjectMapperFactory {
     }
 
     public static ObjectMapper getRightMapper(String rawContent) {
+        if (rawContent == null || rawContent.isEmpty()) {
+            return ObjectMapperFactory.JSON_MAPPER;
+        }
         if (rawContent.trim().startsWith("{")) {
             return ObjectMapperFactory.JSON_MAPPER;
         }
