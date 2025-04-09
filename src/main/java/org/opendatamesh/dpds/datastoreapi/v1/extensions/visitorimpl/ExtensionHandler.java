@@ -88,7 +88,7 @@ public class ExtensionHandler {
             JsonNode rawDefinition;
             switch (status) {
                 case SERIALIZING:
-                    rawDefinition = supportedStandardDefinitionConverter.get().serialize(mapper, standardDefinitionObject);
+                    rawDefinition = supportedStandardDefinitionConverter.get().serialize(mapper, standardDefinitionObject.getDefinition());
                     standardDefinitionObject.setDefinition(mapper.treeToValue(rawDefinition, ComponentBase.class));
                     break;
                 case DESERIALIZING:

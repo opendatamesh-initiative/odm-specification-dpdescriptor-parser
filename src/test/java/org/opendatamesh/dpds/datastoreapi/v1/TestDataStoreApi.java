@@ -14,9 +14,9 @@ import org.opendatamesh.dpds.parser.Parser;
 import org.opendatamesh.dpds.parser.ParserFactory;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestDataStoreApi {
     @Test
@@ -53,7 +53,9 @@ public class TestDataStoreApi {
     public void testSimpleDataStoreApiVisitor() throws IOException {
         JsonNode initialJson = new ObjectMapper().readTree(this.getClass().getResource("data_product_descriptor_simple_data_store_api.json"));
 
-        DataStoreApiParser dataStoreApiParser = DataStoreApiParserFactory.getParser();
+        DataStoreApiParser dataStoreApiParser = DataStoreApiParserFactory
+                .getParser()
+                .register(new DumbDataStoreApiStandardDefinitionObjectConverter());
         DefinitionConverter<DataStoreApi> dataStoreApiConverter = new DataStoreApiDefinitionConverter(dataStoreApiParser);
 
         Parser dataProductParser = ParserFactory.getParser()
@@ -67,14 +69,13 @@ public class TestDataStoreApi {
                 .ignoringCollectionOrder()
                 .isEqualTo(initialJson);
 
-        DefinitionVisitor<DataStoreApi> definitionVisitor = new DataStoreApiDefinitionVisitorImpl();
+        AtomicInteger counter = new AtomicInteger(0);
+        DefinitionVisitor<DataStoreApi> definitionVisitor = new DataStoreApiDefinitionVisitorImpl(counter);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                dataProductVersion.getInterfaceComponents()
-                        .getOutputPorts()
-                        .forEach(port -> definitionVisitor.visit(port.getPromises().getApi().getDefinition()))
-        );
+        dataProductVersion.getInterfaceComponents()
+                .getOutputPorts()
+                .forEach(port -> definitionVisitor.visit(port.getPromises().getApi().getDefinition()));
 
-        assertThat(exception.getMessage()).isEqualTo("OK");
+        assertThat(counter.get()).isEqualTo(1);
     }
 }
