@@ -23,5 +23,5 @@ public abstract class DefinitionVisitor<T extends ComponentBase> implements Stan
     public void visit(ExternalDocs externalDocs) {
     }
 
-    abstract void visitDefinition(T definition);
+    protected abstract void visitDefinition(T definition);
 }

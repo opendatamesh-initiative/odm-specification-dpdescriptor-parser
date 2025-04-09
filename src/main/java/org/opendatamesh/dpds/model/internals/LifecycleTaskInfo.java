@@ -10,7 +10,6 @@ public class LifecycleTaskInfo extends ComponentBase {
 
     private String name;
     private Integer order;
-    //TODO fix the website!!!
     private ExternalDocs service;
     private StandardDefinition template;
     private JsonNode configurations;

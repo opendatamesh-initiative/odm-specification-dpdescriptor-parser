@@ -1,32 +1,31 @@
-package org.opendatamesh.dpds.extensions.visitorsimpl;
+package org.opendatamesh.dpds.datastoreapi.v1.extensions.visitorimpl;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.opendatamesh.dpds.datastoreapi.v1.extensions.DataStoreApiStandardDefinitionConverter;
+import org.opendatamesh.dpds.datastoreapi.v1.model.DataStoreApiStandardDefinitionObject;
 import org.opendatamesh.dpds.extensions.ComponentBaseExtendedConverter;
-import org.opendatamesh.dpds.extensions.DefinitionConverter;
 import org.opendatamesh.dpds.model.core.ComponentBase;
-import org.opendatamesh.dpds.model.core.StandardDefinition;
 
-import java.io.IOException;
 import java.util.*;
 
 public class ExtensionHandler {
 
     private final ExtensionHandlerStatus status;
     private final List<ComponentBaseExtendedConverter<ComponentBase>> componentBaseExtendedConverters;
-    private final List<DefinitionConverter<ComponentBase>> definitionConverters;
+    private final List<DataStoreApiStandardDefinitionConverter<ComponentBase>> tableConverters;
     private final ObjectMapper mapper;
 
     public ExtensionHandler(
             ExtensionHandlerStatus status,
             List<ComponentBaseExtendedConverter<ComponentBase>> componentBaseExtendedConverters,
-            List<DefinitionConverter<ComponentBase>> definitionConverters,
+            List<DataStoreApiStandardDefinitionConverter<ComponentBase>> tableConverters,
             ObjectMapper mapper
     ) {
         this.status = status;
         this.componentBaseExtendedConverters = componentBaseExtendedConverters;
-        this.definitionConverters = definitionConverters;
+        this.tableConverters = tableConverters;
         this.mapper = mapper;
     }
 
@@ -72,32 +71,32 @@ public class ExtensionHandler {
                 .findFirst();
     }
 
-    private Optional<DefinitionConverter<ComponentBase>> findSupportedDefinitionConverter(
+    private Optional<DataStoreApiStandardDefinitionConverter<ComponentBase>> findSupportedTableConverter(
             String definition, String definitionVersion
     ) {
-        return definitionConverters.stream()
+        return tableConverters.stream()
                 .filter(e -> e.supports(definition, definitionVersion))
                 .findFirst();
     }
 
-    public void handleDefinition(StandardDefinition standardDefinition) {
-        Optional<DefinitionConverter<ComponentBase>> supportedDefinitionConverter = findSupportedDefinitionConverter(standardDefinition.getSpecification(), standardDefinition.getSpecificationVersion());
-        if (supportedDefinitionConverter.isEmpty()) {
+    public void handleStandardObjectDefinition(DataStoreApiStandardDefinitionObject standardDefinitionObject) {
+        Optional<DataStoreApiStandardDefinitionConverter<ComponentBase>> supportedStandardDefinitionConverter = findSupportedTableConverter(standardDefinitionObject.getSpecification(), standardDefinitionObject.getSpecificationVersion());
+        if (supportedStandardDefinitionConverter.isEmpty()) {
             return;
         }
         try {
             JsonNode rawDefinition;
             switch (status) {
                 case SERIALIZING:
-                    rawDefinition = supportedDefinitionConverter.get().serialize(mapper, standardDefinition.getDefinition());
-                    standardDefinition.setDefinition(mapper.treeToValue(rawDefinition, ComponentBase.class));
+                    rawDefinition = supportedStandardDefinitionConverter.get().serialize(mapper, standardDefinitionObject);
+                    standardDefinitionObject.setDefinition(mapper.treeToValue(rawDefinition, ComponentBase.class));
                     break;
                 case DESERIALIZING:
-                    rawDefinition = mapper.valueToTree(standardDefinition.getDefinition());
-                    standardDefinition.setDefinition(supportedDefinitionConverter.get().deserialize(mapper, rawDefinition));
+                    rawDefinition = mapper.valueToTree(standardDefinitionObject.getDefinition());
+                    standardDefinitionObject.setDefinition(supportedStandardDefinitionConverter.get().deserialize(mapper, rawDefinition));
                     break;
             }
-        } catch (IOException e) {
+        } catch (JacksonException e) {
             throw new RuntimeException(e);
         }
     }

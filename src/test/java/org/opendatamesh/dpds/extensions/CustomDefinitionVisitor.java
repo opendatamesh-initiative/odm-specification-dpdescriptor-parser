@@ -7,7 +7,7 @@ class CustomDefinitionVisitor extends DefinitionVisitor<CustomDefinition> {
     }
 
     @Override
-    void visitDefinition(CustomDefinition definition) {
+    protected void visitDefinition(CustomDefinition definition) {
         throw new RuntimeException("OK");
     }
 
