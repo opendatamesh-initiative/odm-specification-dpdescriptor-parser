@@ -20,8 +20,8 @@ public class LifecycleInfoDPDS {
         visitor.visit(this);
     }
 
-    public SortedSet<String> getStageNames() {
-        SortedSet<String> stageNames = new TreeSet<>();
+    public Set<String> getStageNames() {
+        LinkedHashSet<String> stageNames = new LinkedHashSet<>();
         for(LifecycleTaskInfoDPDS taskInfo: tasksInfo) {
             stageNames.add(taskInfo.getStageName());
         }
