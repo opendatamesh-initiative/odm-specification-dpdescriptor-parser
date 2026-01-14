@@ -37,13 +37,13 @@ class DataStoreApiParserImpl implements DataStoreApiParser {
             extensionHandler.handleComponentBaseExtension(dataStoreApi, DataStoreApi.class);
 
             if (dataStoreApi.getInfo() != null) {
-                visitor.visit(dataStoreApi.getInfo());
+                dataStoreApi.getInfo().accept(visitor);
             }
             if (dataStoreApi.getServices() != null) {
-                dataStoreApi.getServices().forEach((key, value) -> visitor.visit(value));
+                dataStoreApi.getServices().forEach((key, value) -> value.accept(visitor));
             }
             if (dataStoreApi.getSchema() != null) {
-                visitor.visit(dataStoreApi.getSchema());
+                dataStoreApi.getSchema().accept(visitor);
             }
         }
         return dataStoreApi;
@@ -61,13 +61,13 @@ class DataStoreApiParserImpl implements DataStoreApiParser {
             extensionHandler.handleComponentBaseExtension(dataStoreApi, DataStoreApi.class);
 
             if (dataStoreApi.getInfo() != null) {
-                visitor.visit(dataStoreApi.getInfo());
+                dataStoreApi.getInfo().accept(visitor);
             }
             if (dataStoreApi.getServices() != null) {
-                dataStoreApi.getServices().forEach((key, value) -> visitor.visit(value));
+                dataStoreApi.getServices().forEach((key, value) -> value.accept(visitor));
             }
             if (dataStoreApi.getSchema() != null) {
-                visitor.visit(dataStoreApi.getSchema());
+                dataStoreApi.getSchema().accept(visitor);
             }
         }
         return objectMapper.valueToTree(dataStoreApi);

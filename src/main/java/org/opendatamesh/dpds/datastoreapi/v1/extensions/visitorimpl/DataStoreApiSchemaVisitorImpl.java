@@ -15,7 +15,7 @@ public class DataStoreApiSchemaVisitorImpl extends ExtensionVisitor implements D
         extensionHandler.handleStandardObjectDefinition(standardDefinitionObject);
         DataStoreApiStandardDefinitionObjectVisitor visitor = new DataStoreApiExternalResourceObjectVisitorImpl(this);
         if (standardDefinitionObject.getExternalDocs() != null) {
-            visitor.visit(standardDefinitionObject.getExternalDocs());
+            standardDefinitionObject.getExternalDocs().accept(visitor);
         }
     }
 }

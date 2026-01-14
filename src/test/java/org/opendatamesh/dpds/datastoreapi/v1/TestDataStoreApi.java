@@ -7,11 +7,12 @@ import org.opendatamesh.dpds.datastoreapi.v1.model.DataStoreApi;
 import org.opendatamesh.dpds.datastoreapi.v1.parser.DataStoreApiParser;
 import org.opendatamesh.dpds.datastoreapi.v1.parser.DataStoreApiParserFactory;
 import org.opendatamesh.dpds.extensions.DefinitionConverter;
-import org.opendatamesh.dpds.extensions.DefinitionVisitor;
 import org.opendatamesh.dpds.model.DataProductVersion;
+import org.opendatamesh.dpds.model.core.ComponentBase;
 import org.opendatamesh.dpds.model.interfaces.Port;
 import org.opendatamesh.dpds.parser.Parser;
 import org.opendatamesh.dpds.parser.ParserFactory;
+import org.opendatamesh.dpds.visitors.core.StandardDefinitionVisitor;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -70,11 +71,16 @@ public class TestDataStoreApi {
                 .isEqualTo(initialJson);
 
         AtomicInteger counter = new AtomicInteger(0);
-        DefinitionVisitor<DataStoreApi> definitionVisitor = new DataStoreApiDefinitionVisitorImpl(counter);
+        StandardDefinitionVisitor<DataStoreApi> definitionVisitor = new DataStoreApiDefinitionVisitorImpl(counter);
 
         dataProductVersion.getInterfaceComponents()
                 .getOutputPorts()
-                .forEach(port -> definitionVisitor.visit(port.getPromises().getApi().getDefinition()));
+                .forEach(port -> {
+                    ComponentBase definition = port.getPromises().getApi().getDefinition();
+                    if (definition instanceof DataStoreApi) {
+                        definition.accept(definitionVisitor);
+                    }
+                });
 
         assertThat(counter.get()).isEqualTo(1);
     }

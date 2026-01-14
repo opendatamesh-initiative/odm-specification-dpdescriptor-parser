@@ -19,7 +19,7 @@ public class InternalComponentsExtensionVisitorImpl extends ExtensionVisitor imp
         extensionHandler.handleComponentBaseExtension(applicationComponent, ApplicationComponent.class);
         ApplicationComponentVisitor visitor = new ApplicationComponentExtensionVisitorImpl(this);
         if (applicationComponent.getExternalDocs() != null) {
-            visitor.visit(applicationComponent.getExternalDocs());
+            applicationComponent.getExternalDocs().accept(visitor);
         }
     }
 
@@ -28,7 +28,7 @@ public class InternalComponentsExtensionVisitorImpl extends ExtensionVisitor imp
         extensionHandler.handleComponentBaseExtension(infrastructuralComponent, InfrastructuralComponent.class);
         InfrastructuralComponentVisitor visitor = new InfrastructuralComponentExtensionVisitorImpl(this);
         if (infrastructuralComponent.getExternalDocs() != null) {
-            visitor.visit(infrastructuralComponent.getExternalDocs());
+            infrastructuralComponent.getExternalDocs().accept(visitor);
         }
     }
 
@@ -37,10 +37,10 @@ public class InternalComponentsExtensionVisitorImpl extends ExtensionVisitor imp
         extensionHandler.handleComponentBaseExtension(lifecycleTaskInfo, LifecycleTaskInfo.class);
         LifecycleTaskInfoVisitor visitor = new LifecycleTaskInfoExtensionVisitorImpl(this);
         if (lifecycleTaskInfo.getService() != null) {
-            visitor.visit(lifecycleTaskInfo.getService());
+            lifecycleTaskInfo.getService().accept(visitor);
         }
         if (lifecycleTaskInfo.getTemplate() != null) {
-            visitor.visit(lifecycleTaskInfo.getTemplate());
+            lifecycleTaskInfo.getTemplate().accept(visitor);
         }
     }
 }

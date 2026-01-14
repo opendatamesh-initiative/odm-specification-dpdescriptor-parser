@@ -16,13 +16,13 @@ public class InterfaceComponentsRefVisitor extends RefVisitor implements Interfa
         referenceFileHandler.handleComponentBaseReference(port);
         PortVisitor visitor = new PortRefVisitor(this);
         if (port.getPromises() != null) {
-            visitor.visit(port.getPromises());
+            port.getPromises().accept(visitor);
         }
         if (port.getExpectations() != null) {
-            visitor.visit(port.getExpectations());
+            port.getExpectations().accept(visitor);
         }
         if (port.getObligations() != null) {
-            visitor.visit(port.getObligations());
+            port.getObligations().accept(visitor);
         }
     }
 }

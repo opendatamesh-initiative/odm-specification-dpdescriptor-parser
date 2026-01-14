@@ -1,5 +1,6 @@
 package org.opendatamesh.dpds.references.files.visitorsimpl.components;
 
+import org.opendatamesh.dpds.model.core.ComponentBase;
 import org.opendatamesh.dpds.model.core.StandardDefinition;
 import org.opendatamesh.dpds.model.interfaces.Port;
 import org.opendatamesh.dpds.model.internals.ApplicationComponent;
@@ -25,13 +26,13 @@ public class ComponentsRefVisitor extends RefVisitor implements ComponentsVisito
         referenceFileHandler.handleComponentBaseReference(port);
         PortVisitor visitor = new PortRefVisitor(this);
         if (port.getPromises() != null) {
-            visitor.visit(port.getPromises());
+            port.getPromises().accept(visitor);
         }
         if (port.getObligations() != null) {
-            visitor.visit(port.getObligations());
+            port.getObligations().accept(visitor);
         }
         if (port.getExpectations() != null) {
-            visitor.visit(port.getExpectations());
+            port.getExpectations().accept(visitor);
         }
     }
 
@@ -40,7 +41,7 @@ public class ComponentsRefVisitor extends RefVisitor implements ComponentsVisito
         referenceFileHandler.handleComponentBaseReference(applicationComponent);
         ApplicationComponentVisitor visitor = new ApplicationComponentRefVisitor(this);
         if (applicationComponent.getExternalDocs() != null) {
-            visitor.visit(applicationComponent.getExternalDocs());
+            applicationComponent.getExternalDocs().accept(visitor);
         }
     }
 
@@ -49,19 +50,19 @@ public class ComponentsRefVisitor extends RefVisitor implements ComponentsVisito
         referenceFileHandler.handleComponentBaseReference(infrastructuralComponent);
         InfrastructuralComponentVisitor visitor = new InfrastructuralComponentRefVisitor(this);
         if (infrastructuralComponent.getExternalDocs() != null) {
-            visitor.visit(infrastructuralComponent.getExternalDocs());
+            infrastructuralComponent.getExternalDocs().accept(visitor);
         }
     }
 
     @Override
     public void visit(StandardDefinition standardDefinition) {
         referenceFileHandler.handleComponentBaseReference(standardDefinition);
-        StandardDefinitionVisitor visitor = new StandardDefinitionRefVisitor(this);
+        StandardDefinitionVisitor<ComponentBase> visitor = new StandardDefinitionRefVisitor(this);
         if (standardDefinition.getExternalDocs() != null) {
-            visitor.visit(standardDefinition.getExternalDocs());
+            standardDefinition.getExternalDocs().accept(visitor);
         }
         if (standardDefinition.getDefinition() != null) {
-            visitor.visit(standardDefinition.getDefinition());
+            standardDefinition.getDefinition().accept(visitor);
         }
     }
 }

@@ -32,8 +32,11 @@ public class ComponentBase implements Serializable {
     @Deprecated
     private URI baseUri;
 
-    public void accept(ComponentBaseVisitor visitor) {
-        visitor.visit(this);
+    public <T extends ComponentBase> void accept(ComponentBaseVisitor<T> visitor) {
+        //P.A. Type check should be done in visitors implementations!!!
+        @SuppressWarnings("unchecked")
+        T self = (T) this;
+        visitor.visit(self);
     }
 
     @JsonAnySetter
@@ -101,6 +104,7 @@ public class ComponentBase implements Serializable {
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         String json = (String) in.readObject();
-        additionalProperties = new ObjectMapper().readValue(json, new TypeReference<Map<String, JsonNode>>() {});
+        additionalProperties = new ObjectMapper().readValue(json, new TypeReference<Map<String, JsonNode>>() {
+        });
     }
 }

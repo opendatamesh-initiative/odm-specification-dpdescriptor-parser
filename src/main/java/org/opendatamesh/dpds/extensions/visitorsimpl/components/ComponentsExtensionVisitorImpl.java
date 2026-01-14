@@ -5,6 +5,7 @@ import org.opendatamesh.dpds.extensions.visitorsimpl.core.StandardDefinitionExte
 import org.opendatamesh.dpds.extensions.visitorsimpl.interfaces.port.PortExtensionVisitor;
 import org.opendatamesh.dpds.extensions.visitorsimpl.internals.ApplicationComponentExtensionVisitorImpl;
 import org.opendatamesh.dpds.extensions.visitorsimpl.internals.InfrastructuralComponentExtensionVisitorImpl;
+import org.opendatamesh.dpds.model.core.ComponentBase;
 import org.opendatamesh.dpds.model.core.StandardDefinition;
 import org.opendatamesh.dpds.model.interfaces.Port;
 import org.opendatamesh.dpds.model.internals.ApplicationComponent;
@@ -25,13 +26,13 @@ public class ComponentsExtensionVisitorImpl extends ExtensionVisitor implements 
         extensionHandler.handleComponentBaseExtension(port, Port.class);
         PortVisitor visitor = new PortExtensionVisitor(this);
         if (port.getPromises() != null) {
-            visitor.visit(port.getPromises());
+            port.getPromises().accept(visitor);
         }
         if (port.getObligations() != null) {
-            visitor.visit(port.getObligations());
+            port.getObligations().accept(visitor);
         }
         if (port.getExpectations() != null) {
-            visitor.visit(port.getExpectations());
+            port.getExpectations().accept(visitor);
         }
     }
 
@@ -40,7 +41,7 @@ public class ComponentsExtensionVisitorImpl extends ExtensionVisitor implements 
         extensionHandler.handleComponentBaseExtension(applicationComponent, ApplicationComponent.class);
         ApplicationComponentVisitor visitor = new ApplicationComponentExtensionVisitorImpl(this);
         if (applicationComponent.getExternalDocs() != null) {
-            visitor.visit(applicationComponent.getExternalDocs());
+            applicationComponent.getExternalDocs().accept(visitor);
         }
     }
 
@@ -49,7 +50,7 @@ public class ComponentsExtensionVisitorImpl extends ExtensionVisitor implements 
         extensionHandler.handleComponentBaseExtension(infrastructuralComponent, InfrastructuralComponent.class);
         InfrastructuralComponentVisitor visitor = new InfrastructuralComponentExtensionVisitorImpl(this);
         if (infrastructuralComponent.getExternalDocs() != null) {
-            visitor.visit(infrastructuralComponent.getExternalDocs());
+            infrastructuralComponent.getExternalDocs().accept(visitor);
         }
     }
 
@@ -57,12 +58,12 @@ public class ComponentsExtensionVisitorImpl extends ExtensionVisitor implements 
     public void visit(StandardDefinition standardDefinition) {
         extensionHandler.handleComponentBaseExtension(standardDefinition, StandardDefinition.class);
         extensionHandler.handleDefinition(standardDefinition);
-        StandardDefinitionVisitor visitor = new StandardDefinitionExtensionVisitorImpl(this);
+        StandardDefinitionVisitor<ComponentBase> visitor = new StandardDefinitionExtensionVisitorImpl(this);
         if (standardDefinition.getExternalDocs() != null) {
-            visitor.visit(standardDefinition.getExternalDocs());
+            standardDefinition.getExternalDocs().accept(visitor);
         }
         if (standardDefinition.getDefinition() != null) {
-            visitor.visit(standardDefinition.getDefinition());
+            standardDefinition.getDefinition().accept(visitor);
         }
     }
 }
