@@ -15,7 +15,7 @@ public class DataStoreApiDatabaseServiceVisitorImpl extends ExtensionVisitor imp
         extensionHandler.handleComponentBaseExtension(serverInfo, DataStoreApiServerInfo.class);
         DataStoreApiServerInfoVisitor visitor = new DataStoreApiServerInfoVisitorImpl(this);
         if (serverInfo.getConnectionProtocols() != null) {
-            visitor.visit(serverInfo.getConnectionProtocols());
+            serverInfo.getConnectionProtocols().accept(visitor);
         }
     }
 

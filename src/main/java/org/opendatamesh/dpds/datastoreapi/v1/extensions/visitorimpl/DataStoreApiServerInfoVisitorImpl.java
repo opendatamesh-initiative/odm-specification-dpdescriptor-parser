@@ -14,10 +14,10 @@ public class DataStoreApiServerInfoVisitorImpl extends ExtensionVisitor implemen
         extensionHandler.handleComponentBaseExtension(connectionProtocolObject, DataStoreApiConnectionProtocolObject.class);
         DataStoreApiConnectionProtocolObjectVisitor visitor = new DataStoreApiConnectionProtocolObjectImpl(this);
         if(connectionProtocolObject.getJdbc() != null){
-            visitor.visit(connectionProtocolObject.getJdbc());
+            connectionProtocolObject.getJdbc().accept(visitor);
         }
         if(connectionProtocolObject.getOdbc() != null){
-            visitor.visit(connectionProtocolObject.getOdbc());
+            connectionProtocolObject.getOdbc().accept(visitor);
         }
     }
 }

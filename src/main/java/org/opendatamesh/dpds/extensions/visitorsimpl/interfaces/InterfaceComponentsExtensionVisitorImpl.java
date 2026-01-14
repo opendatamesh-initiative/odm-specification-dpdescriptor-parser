@@ -16,13 +16,13 @@ public class InterfaceComponentsExtensionVisitorImpl extends ExtensionVisitor im
         extensionHandler.handleComponentBaseExtension(port, Port.class);
         PortVisitor visitor = new PortExtensionVisitor(this);
         if (port.getPromises() != null) {
-            visitor.visit(port.getPromises());
+            port.getPromises().accept(visitor);
         }
         if (port.getExpectations() != null) {
-            visitor.visit(port.getExpectations());
+            port.getExpectations().accept(visitor);
         }
         if (port.getObligations() != null) {
-            visitor.visit(port.getObligations());
+            port.getObligations().accept(visitor);
         }
     }
 }

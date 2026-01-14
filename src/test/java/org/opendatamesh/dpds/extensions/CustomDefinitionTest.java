@@ -58,14 +58,14 @@ public class CustomDefinitionTest {
                 .register(new CustomDefinitionConverter());
 
         DataProductVersion pojo = parser.deserialize(initialJson);
-        StandardDefinitionVisitor visitor = new CustomDefinitionVisitor();
+        StandardDefinitionVisitor<CustomDefinition> visitor = new CustomDefinitionVisitorImpl();
 
         Port outputPort = pojo.getInterfaceComponents().getOutputPorts()
                 .stream()
                 .filter(port -> port.getName().equalsIgnoreCase("outputPortName")).findFirst().orElse(null);
 
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                visitor.visit(outputPort.getPromises().getApi().getDefinition())
+                outputPort.getPromises().getApi().getDefinition().accept(visitor)
         );
 
         assertThat(exception.getMessage()).isEqualTo("OK");

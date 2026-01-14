@@ -40,12 +40,12 @@ public class ComponentBaseExtensionTest {
                 .register(new ComponentBaseDumbExtensionConverter());
 
         DataProductVersion dataProductVersion = parser.deserialize(initialJson);
-        ComponentBaseVisitor visitor = new ComponentBaseDumbExtensionVisitorImpl();
+        ComponentBaseVisitor<ComponentBaseDumbExtension> visitor = new ComponentBaseDumbExtensionVisitorImpl();
 
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 dataProductVersion.getParsedProperties()
                         .values()
-                        .forEach(visitor::visit)
+                        .forEach(property -> property.accept(visitor))
         );
 
         assertThat(exception.getMessage()).isEqualTo("OK");

@@ -32,10 +32,10 @@ public class DataProductVersionRefVisitor extends RefVisitor implements DataProd
         referenceFileHandler.handleComponentBaseReference(info);
         InfoVisitor infoVisitor = new InfoRefVisitorImpl(this);
         if (info.getOwner() != null) {
-            infoVisitor.visit(info.getOwner());
+            info.getOwner().accept(infoVisitor);
         }
         if (info.getContactPoints() != null) {
-            info.getContactPoints().forEach(infoVisitor::visit);
+            info.getContactPoints().forEach(cp -> cp.accept(infoVisitor));
         }
     }
 
@@ -52,7 +52,7 @@ public class DataProductVersionRefVisitor extends RefVisitor implements DataProd
                 )
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
-                .forEach(visitor::visit);
+                .forEach(p -> p.accept(visitor));
     }
 
     @Override
@@ -60,15 +60,14 @@ public class DataProductVersionRefVisitor extends RefVisitor implements DataProd
         referenceFileHandler.handleComponentBaseReference(internalComponents);
         InternalComponentsVisitor visitor = new InternalComponentsRefVisitor(this);
         if (internalComponents.getApplicationComponents() != null) {
-            internalComponents.getApplicationComponents().forEach(visitor::visit);
+            internalComponents.getApplicationComponents().forEach(a -> a.accept(visitor));
         }
         if (internalComponents.getInfrastructuralComponents() != null) {
-            internalComponents.getInfrastructuralComponents().forEach(visitor::visit);
+            internalComponents.getInfrastructuralComponents().forEach(i -> i.accept(visitor));
         }
         if (internalComponents.getLifecycleInfo() != null) {
             internalComponents.getLifecycleInfo()
-                    .forEach((stageName, tasks) -> tasks.forEach(visitor::visit)
-                    );
+                    .forEach((stageName, tasks) -> tasks.forEach(t -> t.accept(visitor)));
         }
     }
 
@@ -85,19 +84,19 @@ public class DataProductVersionRefVisitor extends RefVisitor implements DataProd
                 )
                 .filter(Objects::nonNull)
                 .flatMap(map -> map.entrySet().stream())
-                .forEach(entry -> visitor.visit(entry.getValue()));
+                .forEach(entry -> entry.getValue().accept(visitor));
 
         if (components.getApplicationComponents() != null) {
-            components.getApplicationComponents().forEach((k, v) -> visitor.visit(v));
+            components.getApplicationComponents().forEach((k, v) -> v.accept(visitor));
         }
         if (components.getInfrastructuralComponents() != null) {
-            components.getInfrastructuralComponents().forEach((k, v) -> visitor.visit(v));
+            components.getInfrastructuralComponents().forEach((k, v) -> v.accept(visitor));
         }
         if (components.getApis() != null) {
-            components.getApis().forEach((k, v) -> visitor.visit(v));
+            components.getApis().forEach((k, v) -> v.accept(visitor));
         }
         if (components.getTemplates() != null) {
-            components.getTemplates().forEach((k, v) -> visitor.visit(v));
+            components.getTemplates().forEach((k, v) -> v.accept(visitor));
         }
     }
 

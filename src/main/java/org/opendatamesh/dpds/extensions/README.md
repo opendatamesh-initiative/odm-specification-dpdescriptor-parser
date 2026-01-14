@@ -14,9 +14,7 @@ custom extension and specification.
 
 ```
 ├── ComponentBaseExtendedConverter.java (used to support custom fields in the Data Product Descriptor specification )
-├── ComponentBaseExtendedVisitor.java (used to implement visitor pattern on custom fields in the Data Product Descriptor specification )
 ├── DefinitionConverter.java (used to support custom specifications under the StandardDefinition definition field)
-├── DefinitionVisitor.java (used to implement visitor pattern on custom specifications )
 ├── visitorsimpl/ (contains implementations to handle DefinitionConverters and ComponentBaseExtendedConverters registered on the Parser )
 ```
 

@@ -1,30 +1,39 @@
 package org.opendatamesh.dpds.datastoreapi.v1;
 
-import org.opendatamesh.dpds.datastoreapi.v1.extensions.DataStoreApiStandardDefinitionVisitor;
 import org.opendatamesh.dpds.datastoreapi.v1.model.DataStoreApi;
 import org.opendatamesh.dpds.datastoreapi.v1.model.DataStoreApiStandardDefinitionObject;
-import org.opendatamesh.dpds.extensions.DefinitionVisitor;
+import org.opendatamesh.dpds.model.core.ExternalDocs;
+import org.opendatamesh.dpds.visitors.core.ComponentBaseVisitor;
+import org.opendatamesh.dpds.visitors.core.StandardDefinitionVisitor;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-class DataStoreApiDefinitionVisitorImpl extends DefinitionVisitor<DataStoreApi> {
-
+class DataStoreApiDefinitionVisitorImpl implements StandardDefinitionVisitor<DataStoreApi> {
     private final AtomicInteger counter;
 
     DataStoreApiDefinitionVisitorImpl(AtomicInteger counter) {
-        super(DataStoreApi.class);
         this.counter = counter;
     }
 
     @Override
-    protected void visitDefinition(DataStoreApi definition) {
+    public void visit(ExternalDocs externalDocs) {
+        //DO NOTHING
+    }
+
+    @Override
+    public void visit(DataStoreApi definition) {
         if (definition.getSchema() != null && definition.getSchema().getTables() != null) {
-            DataStoreApiStandardDefinitionVisitor<?> visitor = new DumbDataStoreApiStandardDefinitionObjectVisitor(counter);
+            ComponentBaseVisitor<DumbDataStoreApiStandardDefinitionObject> visitor = new DumbDataStoreApiStandardDefinitionObjectVisitorImpl(counter);
             definition.getSchema()
                     .getTables()
                     .stream()
                     .map(DataStoreApiStandardDefinitionObject::getDefinition)
-                    .forEach(visitor::visit);
+                    .forEach(standardDefinitionObject -> {
+                        if (standardDefinitionObject instanceof DumbDataStoreApiStandardDefinitionObject) {
+                            //P.A. The type check MUST be done in visitor implementations!!!
+                            standardDefinitionObject.accept(visitor);
+                        }
+                    });
         }
     }
 }

@@ -20,13 +20,13 @@ public class PortExtensionVisitor extends ExtensionVisitor implements PortVisito
         extensionHandler.handleComponentBaseExtension(obligations, Obligations.class);
         ObligationsVisitor visitor = new ObligationsExtensionVisitor(this);
         if (obligations.getTermsAndConditions() != null) {
-            visitor.visit(obligations.getTermsAndConditions());
+            obligations.getTermsAndConditions().accept(visitor);
         }
         if (obligations.getBillingPolicy() != null) {
-            visitor.visit(obligations.getBillingPolicy());
+            obligations.getBillingPolicy().accept(visitor);
         }
         if (obligations.getSla() != null) {
-            visitor.visit(obligations.getSla());
+            obligations.getSla().accept(visitor);
         }
     }
 
@@ -35,10 +35,10 @@ public class PortExtensionVisitor extends ExtensionVisitor implements PortVisito
         extensionHandler.handleComponentBaseExtension(expectations, Expectations.class);
         ExpectationsVisitor visitor = new ExpectationsExtensionVisitor(this);
         if (expectations.getAudience() != null) {
-            visitor.visit(expectations.getAudience());
+            expectations.getAudience().accept(visitor);
         }
         if (expectations.getUsage() != null) {
-            visitor.visit(expectations.getUsage());
+            expectations.getUsage().accept(visitor);
         }
     }
 
@@ -47,13 +47,13 @@ public class PortExtensionVisitor extends ExtensionVisitor implements PortVisito
         extensionHandler.handleComponentBaseExtension(promises, Promises.class);
         PromisesVisitor visitor = new PromisesExtensionVisitor(this);
         if (promises.getApi() != null) {
-            visitor.visit(promises.getApi());
+            promises.getApi().accept(visitor);
         }
         if (promises.getDeprecationPolicy() != null) {
-            visitor.visit(promises.getDeprecationPolicy());
+            promises.getDeprecationPolicy().accept(visitor);
         }
         if (promises.getSlo() != null) {
-            visitor.visit(promises.getSlo());
+            promises.getSlo().accept(visitor);
         }
     }
 

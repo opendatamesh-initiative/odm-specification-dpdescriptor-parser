@@ -5,7 +5,7 @@ import org.opendatamesh.dpds.model.core.ComponentBase;
 import org.opendatamesh.dpds.model.core.ExternalDocs;
 import org.opendatamesh.dpds.visitors.core.StandardDefinitionVisitor;
 
-public class StandardDefinitionExtensionVisitorImpl extends ExtensionVisitor implements StandardDefinitionVisitor {
+public class StandardDefinitionExtensionVisitorImpl extends ExtensionVisitor implements StandardDefinitionVisitor<ComponentBase> {
 
     public StandardDefinitionExtensionVisitorImpl(ExtensionVisitor parent) {
         super(parent);

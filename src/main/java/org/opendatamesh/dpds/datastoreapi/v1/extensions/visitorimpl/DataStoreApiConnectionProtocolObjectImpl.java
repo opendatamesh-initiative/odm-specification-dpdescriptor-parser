@@ -15,8 +15,8 @@ public class DataStoreApiConnectionProtocolObjectImpl extends ExtensionVisitor i
     public void visit(DataStoreApiJdbcConnectionObject jdbc) {
         extensionHandler.handleComponentBaseExtension(jdbc, DataStoreApiJdbcConnectionObject.class);
         DataStoreApiJdbcConnectionObjectVisitor visitor = new DataStoreApiJdbcConnectionObjectImpl(this);
-        if(jdbc.getDriverDocs() != null){
-            visitor.visit(jdbc.getDriverDocs());
+        if (jdbc.getDriverDocs() != null) {
+            jdbc.getDriverDocs().accept(visitor);
         }
     }
 
@@ -24,8 +24,8 @@ public class DataStoreApiConnectionProtocolObjectImpl extends ExtensionVisitor i
     public void visit(DataStoreApiOdbcConnectionObject odbc) {
         extensionHandler.handleComponentBaseExtension(odbc, DataStoreApiOdbcConnectionObject.class);
         DataStoreApiOdbcConnectionObjectVisitor visitor = new DataStoreApiOdbcConnectionObjectImpl(this);
-        if(odbc.getDriverDocs() != null){
-            visitor.visit(odbc.getDriverDocs());
+        if (odbc.getDriverDocs() != null) {
+            odbc.getDriverDocs().accept(visitor);
         }
     }
 }

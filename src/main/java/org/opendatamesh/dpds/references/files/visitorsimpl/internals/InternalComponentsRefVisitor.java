@@ -19,7 +19,7 @@ public class InternalComponentsRefVisitor extends RefVisitor implements Internal
         referenceFileHandler.handleComponentBaseReference(applicationComponent);
         ApplicationComponentVisitor visitor = new ApplicationComponentRefVisitor(this);
         if (applicationComponent.getExternalDocs() != null) {
-            visitor.visit(applicationComponent.getExternalDocs());
+            applicationComponent.getExternalDocs().accept(visitor);
         }
     }
 
@@ -28,7 +28,7 @@ public class InternalComponentsRefVisitor extends RefVisitor implements Internal
         referenceFileHandler.handleComponentBaseReference(infrastructuralComponent);
         InfrastructuralComponentVisitor visitor = new InfrastructuralComponentRefVisitor(this);
         if (infrastructuralComponent.getExternalDocs() != null) {
-            visitor.visit(infrastructuralComponent.getExternalDocs());
+            infrastructuralComponent.getExternalDocs().accept(visitor);
         }
     }
 
@@ -37,10 +37,10 @@ public class InternalComponentsRefVisitor extends RefVisitor implements Internal
         referenceFileHandler.handleComponentBaseReference(lifecycleTaskInfo);
         LifecycleTaskInfoVisitor visitor = new LifecycleTaskInfoRefVisitor(this);
         if (lifecycleTaskInfo.getService() != null) {
-            visitor.visit(lifecycleTaskInfo.getService());
+            lifecycleTaskInfo.getService().accept(visitor);
         }
         if (lifecycleTaskInfo.getTemplate() != null) {
-            visitor.visit(lifecycleTaskInfo.getTemplate());
+            lifecycleTaskInfo.getTemplate().accept(visitor);
         }
     }
 }

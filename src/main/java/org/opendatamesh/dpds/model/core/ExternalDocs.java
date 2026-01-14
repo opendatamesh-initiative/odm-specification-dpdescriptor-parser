@@ -35,8 +35,11 @@ public class ExternalDocs extends ComponentBase {
         visitor.visit(this);
     }
 
-    public void accept(StandardDefinitionVisitor visitor) {
-        visitor.visit(this);
+    public <T extends ComponentBase> void accept(StandardDefinitionVisitor<T> visitor) {
+        //P.A. Type check should be done in visitors implementations!!!
+        @SuppressWarnings("unchecked")
+        T self = (T) this;
+        visitor.visit(self);
     }
 
     public String getDescription() {

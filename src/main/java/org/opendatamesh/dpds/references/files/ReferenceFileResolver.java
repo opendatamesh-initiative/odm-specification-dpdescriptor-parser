@@ -37,13 +37,13 @@ public abstract class ReferenceFileResolver {
         DataProductVersionRefVisitor visitor = new DataProductVersionRefVisitor(referenceFileHandler);
 
         if (dataProductVersion.getInterfaceComponents() != null) {
-            visitor.visit(dataProductVersion.getInterfaceComponents());
+            dataProductVersion.getInterfaceComponents().accept(visitor);
         }
         if (dataProductVersion.getInternalComponents() != null) {
-            visitor.visit(dataProductVersion.getInternalComponents());
+            dataProductVersion.getInternalComponents().accept(visitor);
         }
         if (dataProductVersion.getComponents() != null) {
-            visitor.visit(dataProductVersion.getComponents());
+            dataProductVersion.getComponents().accept(visitor);
         }
     }
 }

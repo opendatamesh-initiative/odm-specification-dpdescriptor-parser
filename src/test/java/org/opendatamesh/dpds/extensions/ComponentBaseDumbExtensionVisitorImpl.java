@@ -1,13 +1,11 @@
 package org.opendatamesh.dpds.extensions;
 
-class ComponentBaseDumbExtensionVisitorImpl extends ComponentBaseExtendedVisitor<ComponentBaseDumbExtension> {
+import org.opendatamesh.dpds.visitors.core.ComponentBaseVisitor;
 
-    public ComponentBaseDumbExtensionVisitorImpl() {
-        super(ComponentBaseDumbExtension.class);
-    }
+class ComponentBaseDumbExtensionVisitorImpl implements ComponentBaseVisitor<ComponentBaseDumbExtension> {
 
     @Override
-    void visitExtension(ComponentBaseDumbExtension componentBase) {
+    public void visit(ComponentBaseDumbExtension componentBase) {
         throw new RuntimeException("OK");
     }
 }

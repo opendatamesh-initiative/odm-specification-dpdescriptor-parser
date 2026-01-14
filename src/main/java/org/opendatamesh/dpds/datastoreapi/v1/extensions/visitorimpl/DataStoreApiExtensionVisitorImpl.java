@@ -21,10 +21,10 @@ public class DataStoreApiExtensionVisitorImpl extends ExtensionVisitor implement
         extensionHandler.handleComponentBaseExtension(info, DataStoreApiInfo.class);
         DataStoreApiInfoVisitor visitor = new DataStoreApiInfoVisitorImpl(this);
         if (info.getContact() != null) {
-            visitor.visit(info.getContact());
+            info.getContact().accept(visitor);
         }
         if (info.getLicense() != null) {
-            visitor.visit(info.getLicense());
+            info.getLicense().accept(visitor);
         }
     }
 
@@ -33,10 +33,10 @@ public class DataStoreApiExtensionVisitorImpl extends ExtensionVisitor implement
         extensionHandler.handleComponentBaseExtension(databaseService, DataStoreApiDatabaseService.class);
         DataStoreApiDatabaseServiceVisitor visitor = new DataStoreApiDatabaseServiceVisitorImpl(this);
         if (databaseService.getServerInfo() != null) {
-            visitor.visit(databaseService.getServerInfo());
+            databaseService.getServerInfo().accept(visitor);
         }
         if (databaseService.getVariables() != null) {
-            databaseService.getVariables().forEach((key, value) -> visitor.visit(value));
+            databaseService.getVariables().forEach((key, value) -> value.accept(visitor));
         }
     }
 
@@ -45,7 +45,7 @@ public class DataStoreApiExtensionVisitorImpl extends ExtensionVisitor implement
         extensionHandler.handleComponentBaseExtension(schema, DataStoreApiSchema.class);
         DataStoreApiSchemaVisitor visitor = new DataStoreApiSchemaVisitorImpl(this);
         if (schema.getTables() != null) {
-            schema.getTables().forEach(visitor::visit);
+            schema.getTables().forEach(table -> table.accept(visitor));
         }
     }
 }
