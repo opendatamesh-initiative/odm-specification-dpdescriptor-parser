@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.opendatamesh.dpds.exceptions.DeserializationException;
-import org.opendatamesh.dpds.utils.ObjectMapperFactory;
 import org.opendatamesh.dpds.model.DataProductVersionDPDS;
 import org.opendatamesh.dpds.model.core.ComponentDPDS;
 import org.opendatamesh.dpds.model.core.ComponentsDPDS;
@@ -17,6 +16,7 @@ import org.opendatamesh.dpds.model.interfaces.PortDPDS;
 import org.opendatamesh.dpds.model.internals.InternalComponentsDPDS;
 import org.opendatamesh.dpds.model.internals.LifecycleInfoDPDS;
 import org.opendatamesh.dpds.model.internals.LifecycleTaskInfoDPDS;
+import org.opendatamesh.dpds.utils.ObjectMapperFactory;
 
 import java.util.Iterator;
 import java.util.List;
@@ -58,7 +58,7 @@ public class DPDSDeserializer {
     }
 
     private void setRootEntityRawContent(DataProductVersionDPDS descriptorResource, String descriptorContent,
-            ObjectMapper mapper)
+                                         ObjectMapper mapper)
             throws DeserializationException {
 
         try {
@@ -143,14 +143,14 @@ public class DPDSDeserializer {
                 ObjectNode taskInfoNode = (ObjectNode) tasksInfoNode.get(i);
                 taskInfoNode.put("stageName", stageName);
 
+                taskInfoRes.setRawContent(
+                        mapper.writeValueAsString(taskInfoNode));
+
                 if (taskInfoRes.hasTemplate()) {
 
                     ObjectNode templateNode = (ObjectNode) taskInfoNode.remove("template");
                     setComponetRawContent(taskInfoRes.getTemplate(), templateNode, mapper);
                 }
-
-                taskInfoRes.setRawContent(
-                        mapper.writeValueAsString(taskInfoNode));
             }
         }
     }
