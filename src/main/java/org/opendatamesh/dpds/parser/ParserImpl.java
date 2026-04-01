@@ -39,13 +39,13 @@ class ParserImpl implements Parser {
             DataProductVersionVisitor visitor = new DataProductVersionExtensionVisitorImpl(extensionHandler);
             extensionHandler.handleComponentBaseExtension(dataProductVersion, DataProductVersion.class);
             if (dataProductVersion.getInterfaceComponents() != null) {
-                visitor.visit(dataProductVersion.getInterfaceComponents());
+                dataProductVersion.getInterfaceComponents().accept(visitor);
             }
             if (dataProductVersion.getInternalComponents() != null) {
-                visitor.visit(dataProductVersion.getInternalComponents());
+                dataProductVersion.getInternalComponents().accept(visitor);
             }
             if (dataProductVersion.getComponents() != null) {
-                visitor.visit(dataProductVersion.getComponents());
+                dataProductVersion.getComponents().accept(visitor);
             }
         }
         return dataProductVersion;
@@ -53,7 +53,7 @@ class ParserImpl implements Parser {
     }
 
     @Override
-    public JsonNode serialize(DataProductVersion product) throws IOException{
+    public JsonNode serialize(DataProductVersion product) throws IOException {
         // Deep copying the descriptor object so it can be modified without affecting
         // the original object passed as parameter
         DataProductVersion dataProductVersion = deepCopy(product);
@@ -62,13 +62,13 @@ class ParserImpl implements Parser {
             DataProductVersionVisitor visitor = new DataProductVersionExtensionVisitorImpl(extensionHandler);
             extensionHandler.handleComponentBaseExtension(dataProductVersion, DataProductVersion.class);
             if (dataProductVersion.getInterfaceComponents() != null) {
-                visitor.visit(dataProductVersion.getInterfaceComponents());
+                dataProductVersion.getInterfaceComponents().accept(visitor);
             }
             if (dataProductVersion.getInternalComponents() != null) {
-                visitor.visit(dataProductVersion.getInternalComponents());
+                dataProductVersion.getInternalComponents().accept(visitor);
             }
             if (dataProductVersion.getComponents() != null) {
-                visitor.visit(dataProductVersion.getComponents());
+                dataProductVersion.getComponents().accept(visitor);
             }
         }
         return objectMapper.valueToTree(dataProductVersion);
