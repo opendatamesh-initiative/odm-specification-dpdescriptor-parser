@@ -38,6 +38,9 @@ class ParserImpl implements Parser {
             ExtensionHandler extensionHandler = new ExtensionHandler(DESERIALIZING, componentBaseExtendedConverters, definitionConverters, objectMapper);
             DataProductVersionVisitor visitor = new DataProductVersionExtensionVisitorImpl(extensionHandler);
             extensionHandler.handleComponentBaseExtension(dataProductVersion, DataProductVersion.class);
+            if (dataProductVersion.getblueprint() != null) {
+                dataProductVersion.getblueprint().accept(visitor);
+            }
             if (dataProductVersion.getInterfaceComponents() != null) {
                 dataProductVersion.getInterfaceComponents().accept(visitor);
             }
@@ -61,6 +64,9 @@ class ParserImpl implements Parser {
             ExtensionHandler extensionHandler = new ExtensionHandler(SERIALIZING, componentBaseExtendedConverters, definitionConverters, objectMapper);
             DataProductVersionVisitor visitor = new DataProductVersionExtensionVisitorImpl(extensionHandler);
             extensionHandler.handleComponentBaseExtension(dataProductVersion, DataProductVersion.class);
+            if (dataProductVersion.getblueprint() != null) {
+                dataProductVersion.getblueprint().accept(visitor);
+            }
             if (dataProductVersion.getInterfaceComponents() != null) {
                 dataProductVersion.getInterfaceComponents().accept(visitor);
             }

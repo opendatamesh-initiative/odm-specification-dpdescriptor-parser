@@ -1,5 +1,6 @@
 package org.opendatamesh.dpds.visitors;
 
+import org.opendatamesh.dpds.model.blueprint.Blueprint;
 import org.opendatamesh.dpds.model.components.Components;
 import org.opendatamesh.dpds.model.core.ExternalDocs;
 import org.opendatamesh.dpds.model.info.Info;
@@ -16,4 +17,6 @@ public interface DataProductVersionVisitor {
     void visit(Components components);
 
     void visit(ExternalDocs externalDocs);
+
+    void visit(Blueprint blueprint);
 }

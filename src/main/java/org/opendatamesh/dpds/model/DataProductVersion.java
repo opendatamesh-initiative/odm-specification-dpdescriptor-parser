@@ -1,14 +1,15 @@
 package org.opendatamesh.dpds.model;
 
-import org.opendatamesh.dpds.model.core.ComponentBase;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.opendatamesh.dpds.model.blueprint.Blueprint;
 import org.opendatamesh.dpds.model.components.Components;
+import org.opendatamesh.dpds.model.core.ComponentBase;
 import org.opendatamesh.dpds.model.core.ExternalDocs;
 import org.opendatamesh.dpds.model.info.Info;
 import org.opendatamesh.dpds.model.interfaces.InterfaceComponents;
 import org.opendatamesh.dpds.model.internals.InternalComponents;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DataProductVersion extends ComponentBase {
 
@@ -19,6 +20,7 @@ public class DataProductVersion extends ComponentBase {
     private Components components;
     private List<String> tags = new ArrayList<>();
     private ExternalDocs externalDocs;
+    private Blueprint blueprint;
 
     public String getDataProductDescriptor() {
         return dataProductDescriptor;
@@ -74,5 +76,13 @@ public class DataProductVersion extends ComponentBase {
 
     public void setExternalDocs(ExternalDocs externalDocs) {
         this.externalDocs = externalDocs;
+    }
+
+    public Blueprint getblueprint() {
+        return blueprint;
+    }
+
+    public void setblueprint(Blueprint blueprint) {
+        this.blueprint = blueprint;
     }
 }

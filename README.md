@@ -20,6 +20,7 @@
       <a href="#overview">Overview</a>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#blueprint-lineage">Blueprint lineage (<code>blueprint</code>)</a></li>
     <li><a href="#examples">Examples</a></li>
     <li><a href="#prerequisites">Prerequisites</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -66,6 +67,58 @@ All exceptions that can be thrown from the library code are found in this packag
 
 The `/api` package contains the code to analyze the `api` fields that are present inside the Data Product Descriptor.
 These can be written following `AsyncAPI`, `OpenAPI`, or `DataStoreAPI` specifications.
+
+## Blueprint lineage (`blueprint`)
+
+The optional root-level `blueprint` object records **provenance** when a data product is created by instantiating a platform blueprint. It answers two questions for tools and operators:
+
+1. **Which blueprint version** produced this descriptor?
+2. **Which parameter values** were applied at instantiation (including manifest defaults merged into the resolved map)?
+
+The block is **not** part of the blueprint manifest itself; it is embedded in the **data product descriptor** on the root target repository after templating and before the descriptor is committed. Descriptors that were never instantiated from a blueprint simply omit `blueprint`, and parsers treat the field as optional.
+
+### Model
+
+- Java type: `org.opendatamesh.dpds.model.blueprint.Blueprint`
+- Parent: `DataProductVersion` exposes it via `getblueprint()` / `setblueprint()`
+- Visitors: `DataProductVersionVisitor#visit(Blueprint)` is invoked during parse/serialize walks when `blueprint` is present
+
+| Property | Description |
+| --- | --- |
+| `schemaVersion` | Version of the `blueprint` object shape (currently `"1"`) |
+| `blueprintUuid` | Platform identifier of the parent blueprint |
+| `blueprintName` | Blueprint technical name |
+| `blueprintDisplayName` | Human-readable blueprint title |
+| `blueprintVersionUuid` | Platform identifier of the published blueprint version used |
+| `blueprintVersionNumber` | Semantic version number of that blueprint version |
+| `blueprintVersionTag` | Optional tag associated with the published version |
+| `parameters` | JSON object of resolved instantiation parameters (`JsonNode` in Java) |
+
+### Example
+
+```json
+{
+  "info": {
+    "name": "my-data-product",
+    "version": "1.0.0"
+  },
+  "blueprint": {
+    "schemaVersion": "1",
+    "blueprintUuid": "a1b2c3d4-...",
+    "blueprintName": "customer-360",
+    "blueprintDisplayName": "Customer 360",
+    "blueprintVersionUuid": "e5f6g7h8-...",
+    "blueprintVersionNumber": "2.1.0",
+    "blueprintVersionTag": "release-2026-05",
+    "parameters": {
+      "environment": "prod",
+      "region": "eu-west-1"
+    }
+  }
+}
+```
+
+Typical writers (for example the blueprint platform instantiate use case) populate this block using the shared `Parser` deserialize → mutate → serialize flow so both **JSON and YAML** descriptors round-trip consistently. Consumers can use the stored UUIDs and names to link back to blueprint catalog UIs or to support future governance checks (for example verifying that a data product still matches its originating blueprint and parameters).
 
 ## Examples
 #### Parsing textual descriptor into DataProductVersionDPDS object

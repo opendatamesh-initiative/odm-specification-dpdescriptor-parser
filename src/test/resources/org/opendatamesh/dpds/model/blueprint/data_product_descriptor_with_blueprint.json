@@ -1,0 +1,18 @@
+{
+  "info": {
+    "name": "n",
+    "version": "v"
+  },
+  "blueprint": {
+    "schemaVersion": "1",
+    "blueprintUuid": "bu",
+    "blueprintName": "bn",
+    "blueprintDisplayName": "B N",
+    "blueprintVersionUuid": "bvu",
+    "blueprintVersionNumber": "1.0",
+    "blueprintVersionTag": "t1",
+    "parameters": {
+      "k": 1
+    }
+  }
+}

@@ -1,5 +1,6 @@
 package org.opendatamesh.dpds.references.files.visitorsimpl;
 
+import org.opendatamesh.dpds.model.blueprint.Blueprint;
 import org.opendatamesh.dpds.model.components.Components;
 import org.opendatamesh.dpds.model.core.ExternalDocs;
 import org.opendatamesh.dpds.model.info.Info;
@@ -103,5 +104,10 @@ public class DataProductVersionRefVisitor extends RefVisitor implements DataProd
     @Override
     public void visit(ExternalDocs externalDocs) {
         referenceFileHandler.handleComponentBaseReference(externalDocs);
+    }
+
+    @Override
+    public void visit(Blueprint blueprint) {
+        referenceFileHandler.handleComponentBaseReference(blueprint);
     }
 }
