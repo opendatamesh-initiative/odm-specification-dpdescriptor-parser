@@ -4,6 +4,7 @@ import org.opendatamesh.dpds.extensions.visitorsimpl.components.ComponentsExtens
 import org.opendatamesh.dpds.extensions.visitorsimpl.info.InfoExtensionVisitorImpl;
 import org.opendatamesh.dpds.extensions.visitorsimpl.interfaces.InterfaceComponentsExtensionVisitorImpl;
 import org.opendatamesh.dpds.extensions.visitorsimpl.internals.InternalComponentsExtensionVisitorImpl;
+import org.opendatamesh.dpds.model.blueprint.Blueprint;
 import org.opendatamesh.dpds.model.components.Components;
 import org.opendatamesh.dpds.model.core.ExternalDocs;
 import org.opendatamesh.dpds.model.info.Info;
@@ -102,5 +103,10 @@ public class DataProductVersionExtensionVisitorImpl extends ExtensionVisitor imp
     @Override
     public void visit(ExternalDocs externalDocs) {
         extensionHandler.handleComponentBaseExtension(externalDocs, ExternalDocs.class);
+    }
+
+    @Override
+    public void visit(Blueprint blueprint) {
+        extensionHandler.handleComponentBaseExtension(blueprint, Blueprint.class);
     }
 }
